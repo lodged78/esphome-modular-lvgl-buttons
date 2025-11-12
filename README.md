@@ -12,7 +12,7 @@
 
 ## What is this???
 
-I wanted to build simple touch panles to control lighting and also simple real time infermational display screen usingg ESPhome and Home Assistant. This libary does both. With only a few lines of code you can build the info displays and control panles of you dreams!
+I set out to build simple, touch-enabled panels for lighting control and real-time information displays using ESPHome and Home Assistant. This library streamlines the process — with just a few lines of YAML, you can deploy responsive interfaces that combine both control and display functionality. Perfect for dashboards, room controllers, and other smart hardware projects.
 
 ## Install ESPHome on a build machine
 
