@@ -15,21 +15,20 @@ esphome:
     board_upload.maximum_ram_size: 524288
 
 esp32:
-  board: esp32s3_120_16_8-qio_opi
-  variant: esp32s3
+  board: esp32-s3-devkitc1-n16r8
   flash_size: 16MB
   cpu_frequency: 240MHz
   framework:
     type: esp-idf
     sdkconfig_options:
-      CONFIG_BOOTLOADER_FLASH_DC_AWARE: n     # To fix reset issue
-      CONFIG_SPI_FLASH_HPM_DC_DISABLE: y
-      CONFIG_ESP_CONSOLE_USB_CDC: y
+      CONFIG_BOOTLOADER_FLASH_DC_AWARE: n     # After the first upload you may
+      CONFIG_SPI_FLASH_HPM_DC_DISABLE: y      # have to press the reset button on the back
+      CONFIG_ESP_CONSOLE_USB_CDC: y           # these options fix that for further OTA updates
 
 
 psram:
   mode: octal
-  speed: 80Mhz
+  speed: 80Mhz            # Specced at 120MHz - but more devices work at 80MHz
 
 preferences:
   flash_write_interval: 5min
