@@ -109,7 +109,6 @@ display:
 
 # LVGL settings required for this display
 lvgl:
-  buffer_size: 100%
   byte_order: little_endian
 
 # -------------------------------------------

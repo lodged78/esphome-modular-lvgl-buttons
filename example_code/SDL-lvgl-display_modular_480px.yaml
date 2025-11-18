@@ -30,10 +30,11 @@ substitutions:
   # Screen Size
   screen_height: '480'
   screen_width: '480'
+  byte_order: big_endian
 
 esphome:
-  name: new-test
-  friendly_name: new-test
+  name: sdl-480px-test
+  friendly_name: SDL 480px-test
   includes:
     - <sstream>
     - <algorithm>
@@ -104,7 +105,6 @@ lvgl:
               text: Button 1
               icon: $mdi_lightbulb
               entity_id: "switch.athom_smart_plug_v3_50ebc0_switch"
-
 
 # I you want to use other icons add them to the list here
 font:

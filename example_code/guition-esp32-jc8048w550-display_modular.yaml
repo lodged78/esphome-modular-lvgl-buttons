@@ -30,6 +30,7 @@ substitutions:
   # Screen Size
   screen_height: '480px'
   screen_width: '800px'
+  byte_order: big_endian
 
 esphome:
   name: "guition-esp32-jc8048w550"

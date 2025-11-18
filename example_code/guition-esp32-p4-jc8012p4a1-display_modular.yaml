@@ -30,6 +30,7 @@ substitutions:
   # Screen Size
   screen_height: '1280'
   screen_width: '800'
+  byte_order: little_endian
 
 esphome:
   name: "guition-esp32-p4-jc8012p4a1"

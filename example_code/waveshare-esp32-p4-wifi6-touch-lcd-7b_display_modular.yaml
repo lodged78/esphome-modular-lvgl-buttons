@@ -30,6 +30,7 @@ substitutions:
   # Screen Size
   screen_height: 600
   screen_width: 1024
+  byte_order: little_endian
 
 esphome:
   name: "waveshare-esp32-p4-touch-lcd-7b"
