@@ -47,7 +47,7 @@ I use the File Manager Add-on to download and edit code from Git repos and the E
 
 [File Manager Add-on](https://github.com/home-assistant/addons/tree/master/configurator)
 
-[ESPHome Device builder Add-on](https://esphome.io/)
+[ESPHome Device builder Add-on](https://esphome.io/guides/getting_started_hassio/)
 
 # More information on supported devices
 
