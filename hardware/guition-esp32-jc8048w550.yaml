@@ -55,8 +55,8 @@ light:
 #-------------------------------------------
 i2c:
   - id: bus_a
-    sda: 19
-    scl: 20
+    sda: GPIO19
+    scl: GPIO20
     scan: true
 
 touchscreen:
@@ -79,10 +79,10 @@ display:
     dimensions:
       width: 800
       height: 480
-    de_pin: 40
-    hsync_pin: 39
-    vsync_pin: 41
-    pclk_pin: 42
+    de_pin: GPIO40
+    hsync_pin: GPIO39
+    vsync_pin: GPIO41
+    pclk_pin: GPIO42
     pclk_frequency: 16MHz
     data_pins:
       red:

@@ -57,8 +57,8 @@ light:
 #-------------------------------------------
 i2c:
   - id: bus_a
-    sda: 4
-    scl: 8
+    sda: GPIO4
+    scl: GPIO8
     scan: true
 
 touchscreen:
@@ -71,7 +71,7 @@ touchscreen:
 #-------------------------------------------
 spi:
   - type: quad
-    clk_pin: 47
+    clk_pin: GPIO47
     data_pins: [21, 48, 40, 39]
     
 display:

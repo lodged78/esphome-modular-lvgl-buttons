@@ -31,7 +31,7 @@ preferences:
 
 output:
   - platform: ledc
-    pin: 2
+    pin: GPIO2
     frequency: 1220
     id: gpio_backlight_pwm
 
@@ -49,8 +49,8 @@ light:
 # -------------------------------------------
 i2c:
   - id: bus_a
-    sda: 19
-    scl: 20
+    sda: GPIO19
+    scl: GPIO20
     scan: true
 
 touchscreen:
@@ -89,7 +89,7 @@ display:
         - 6
         - 5
         - 4
-    de_pin: 41
+    de_pin: GPIO41
     hsync_pin: 39
     vsync_pin: 40
     pclk_pin: 0

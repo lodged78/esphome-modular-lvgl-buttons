@@ -4,7 +4,7 @@
 # Hardware configuration file
 
 esphome:
-  min_version: 2025.7.0
+  min_version: 2025.10.0
   project:
     name: "Guition.ESP32-jc4827w543C"
     version: "1.0"
@@ -61,8 +61,8 @@ light:
 #-------------------------------------------
 i2c:
   - id: bus_a
-    sda: 8
-    scl: 4
+    sda: GPIO8
+    scl: GPIO4
     scan: true
 
 touchscreen:
@@ -72,7 +72,7 @@ touchscreen:
     interrupt_pin:
       number: 3
       ignore_strapping_warning: true
-    reset_pin: 38
+    reset_pin: GPIO38
 
 #-------------------------------------------
 # Display NV3041A
@@ -80,7 +80,7 @@ touchscreen:
 spi:
   id: quad_spi
   type: quad
-  clk_pin: 47
+  clk_pin: GPIO47
   data_pins: [21,48,40,39]
 
 display:
