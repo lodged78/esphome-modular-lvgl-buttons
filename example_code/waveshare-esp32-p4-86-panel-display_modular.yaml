@@ -77,7 +77,7 @@ packages:
   # Use this theme for debugging
   # theme_style: !include esphome-modular-lvgl-buttons/common/theme_style_debug.yaml
   # Include if your touch screen has a backlight. Also sets the time from HA
-  backlight: !include esphome-modular-lvgl-buttons/common/backlignt_time.yaml
+  backlight: !include esphome-modular-lvgl-buttons/common/backlight_time.yaml
 
   # Harware description file
   hardware: !include esphome-modular-lvgl-buttons/hardware/waveshare-esp32-p4-86-panel.yaml

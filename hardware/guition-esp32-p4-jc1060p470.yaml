@@ -14,6 +14,8 @@ esp32:
   flash_size: 16MB
   framework:
     type: esp-idf
+    sdkconfig_options:
+      CONFIG_SPIRAM_XIP_FROM_PSRAM: y   # To stop the screen flashing during OTA updates
     advanced:
       enable_idf_experimental_features: yes
 
