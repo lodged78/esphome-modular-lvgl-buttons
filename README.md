@@ -25,12 +25,12 @@ A modular library for building beautiful, touch-enabled control panels using ESP
 
 | Model | Size | Resolution | Touch | Features | Link |
 |-------|------|------------|-------|----------|------|
-| `ESP32-4848S040` | 4.0" | 480×480 | Capacitive | 120V/220V relays, built-in power supply, USB-C | [AliExpress](https://www.aliexpress.com/item/3256806436431838.html) |
+| `ESP32-4848S040` | 4.0" | 480×480 | Capacitive | 120V/220V relays, built-in power supply, USB-C | [ESPHome Devices](https://devices.esphome.io/devices/Guition-ESP32-S3-4848S040/) |
 | `ESP32-JC8048W550` | 5.0" | 480×800 | Capacitive | 16MB flash, Qwiic (I2C) port, speaker port, USB-C | [AliExpress](https://www.aliexpress.com/item/3256806546911788.html) |
-| `ESP32-JC8048W535` | 3.5" | 480×320 | Capacitive | USB-C | Hardware config included |
-| `ESP32-jc4827w543C` | 4.3" | 272×480 | Capacitive | Bright IPS display, DAC + AMP, speaker connector, USB-C | [AliExpress](https://www.aliexpress.com/item/3256806543342794.html) |
-| `ESP32-P4-JC1060P470` | 4.7" | 1060×600 | Capacitive | ESP32-P4 based, USB-C | Hardware config included |
-| `ESP32-P4-JC8012P4A1` | - | 800×1280 | Capacitive | ESP32-P4 based, USB-C | Hardware config included |
+| `ESP32-JC8048W535` | 3.5" | 480×320 | Capacitive | USB-C | [AliExpress search results for JC8048W535](https://www.aliexpress.com/wholesale?SearchText=JC8048W535) |
+| `ESP32-jc4827w543C` | 4.3" | 272×480 | Capacitive | Bright IPS display, DAC + AMP, speaker connector, USB-C | [AliExpress search results for jc4827w543C](https://www.aliexpress.com/wholesale?SearchText=jc4827w543C) |
+| `ESP32-P4-JC1060P470` | 4.7" | 1060×600 | Capacitive | ESP32-P4 based, USB-C | [AliExpress search results for JC1060P470](https://www.aliexpress.com/wholesale?SearchText=JC1060P470) |
+| `ESP32-P4-JC8012P4A1` | - | 800×1280 | Capacitive | ESP32-P4 based, USB-C | [AliExpress search for JC8012P4A1](https://www.aliexpress.com/wholesale?SearchText=JC8012P4A1) |
 
 ### Sunton Displays
 
@@ -219,11 +219,3 @@ The largest and highest resolution affordable screen. Excellent touch screen and
 Contributions are welcome! Please feel free to submit a Pull Request.
 
 ## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [ESPHome](https://esphome.io/) - The amazing platform that makes this possible
-- [LVGL](https://lvgl.io/) - Light and Versatile Graphics Library
-- [Home Assistant](https://www.home-assistant.io/) - The heart of the smart home
