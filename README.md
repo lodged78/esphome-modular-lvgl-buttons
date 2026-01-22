@@ -45,14 +45,13 @@ A modular library for building beautiful, touch-enabled control panels using ESP
 
 ### Waveshare Displays
 
-| Model | Size | Resolution | Touch | Features | Link |
-|-------|------|------------|-------|----------|------|
-| `ESP32-S3-Touch-LCD-7` | 7.0" | 800×480 | Capacitive | USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
-| `ESP32-S3-Touch-LCD-7B` | 7.0" | 800×480 | Capacitive | Variant B, USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
-| `ESP32-S3-Touch-LCD-4.3` | 4.3" | 800×480 | Capacitive | USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
-| `ESP32-S3-Touch-LCD-2.8C` | 2.8" | 320×240 | Capacitive | USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
-| `ESP32-P4-WiFi6-Touch-LCD-7B` | 7.0" | 800×480 | Capacitive | ESP32-P4, WiFi 6, USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
-| `ESP32-P4-86-Panel` | 4.0" | 480×480 | Capacitive | ESP32-P4 based, 86mm panel form factor | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
+| Model | Size | Resolution | Touch | Official Link |
+|-------|------|------------|-------|---------------|
+| ESP32-S3-Touch-LCD-2.8 | 2.8″ | 240×320 | Capacitive | https://www.waveshare.com/esp32-s3-touch-lcd-2.8.htm |
+| ESP32-S3-Touch-LCD-4.3 | 4.3″ | 800×480 | Capacitive | https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3 |
+| ESP32-S3-Touch-LCD-4.3B | 4.3″ | 800×480 | Capacitive | https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4.3B |
+| ESP32-S3-Touch-LCD-4B | 4.0″ | 480×480 | Capacitive | https://www.waveshare.com/wiki/ESP32-S3-Touch-LCD-4B |
+| ESP32-S3-Touch-LCD-7 | 7.0″ | 800×480 | Capacitive | https://www.waveshare.com/esp32-s3-touch-lcd-7.htm |
 
 ### Elecrow Displays
 
@@ -67,4 +66,155 @@ A modular library for building beautiful, touch-enabled control panels using ESP
 |-------|------|------------|-------|------|
 | `ESP32-S3-Box-3` | 2.4" | 320×240 | Capacitive | [AliExpress search for ESP32 S3 Box 3](https://www.aliexpress.com/wholesale?SearchText=ESP32+S3+Box+3) |
 | `LilyGo T-Display-S3` | 1.9" | 170×320 | Capacitive | [AliExpress search for LilyGo T-Display-S3](https://www.aliexpress.com/wholesale?SearchText=LilyGo+T-Display-S3) |
-| `SDL Display` | Variable | Variable | Mouse | Local SDL testing environment (desktop) | 
+| `SDL Display` | Variable | Variable | Mouse | Local SDL testing environment (desktop) |
+
+## 🧩 Available Components
+
+### Buttons (`buttons/`)
+
+| Component | Description |
+|-----------|-------------|
+| `switch_button.yaml` | Toggle switches and lights with on/off state |
+| `dimmer_light_button.yaml` | Light control with brightness slider |
+| `scene_button.yaml` | Trigger Home Assistant scenes |
+| `page_button.yaml` | Navigate between LVGL pages |
+| `time_button.yaml` | Display current time with page navigation |
+| `local_relay_button.yaml` | Control local GPIO relays |
+| `color_picker.yaml` | RGB color selection for lights |
+
+### Pages (`pages/`)
+
+| Component | Description |
+|-----------|-------------|
+| `info.yaml` | System information screen (ESPHome version, IP, MAC, WiFi) |
+| `light_color.yaml` | Advanced light control with color/temperature modes |
+| `loading_480px.yaml` | Boot screen with Home Assistant connection status |
+
+### Widgets (`widgets/`)
+
+| Component | Description |
+|-----------|-------------|
+| `swipe_navigation.yaml` | Enable swipe gestures for page navigation |
+
+### Sensors (`sensors/`)
+
+| Component | Description |
+|-----------|-------------|
+| `sensors_base.yaml` | Core sensors (WiFi, CPU temp, device info) |
+| `sensors_base-SDL.yaml` | Simplified sensors for SDL desktop testing |
+
+### Weather (`weather_homeassistant/`)
+
+| Component | Description |
+|-----------|-------------|
+| `weather_forecast_action.yaml` | 4-day weather forecast display |
+| `weather_today.yaml` | Current weather conditions |
+| `weather_icons_update.yaml` | Weather icon helper |
+
+### Other Modules
+
+| Directory | Description |
+|-----------|-------------|
+| `tides/` | NOAA tides and currents display |
+| `solar/` | Solar panel monitoring widgets |
+| `common/` | Shared configuration and styles |
+| `assets/` | Images, icons, and fonts |
+
+## 🚀 Quick Start
+
+### Prerequisites
+
+ESPHome with SVG support (for vector graphics):
+
+```bash
+pip install esphome cairosvg
+```
+
+### Installation
+
+1. Clone this repository into your ESPHome configuration directory:
+
+```bash
+git clone https://github.com/agillis/esphome-modular-lvgl-buttons.git
+```
+
+2. Copy an example configuration for your display:
+
+```bash
+cp esphome-modular-lvgl-buttons/example_code/guition-esp32-s3-4848s040-display_modular.yaml .
+```
+
+3. Edit the configuration file to customize your device name and settings.
+
+4. Build and deploy:
+
+```bash
+esphome compile guition-esp32-s3-4848s040-display_modular.yaml
+esphome run guition-esp32-s3-4848s040-display_modular.yaml --device 192.168.1.100
+```
+
+## 🏠 Home Assistant Integration
+
+### Using File Manager Add-on
+
+The [File Manager Add-on](https://github.com/home-assistant/addons/tree/master/configurator) allows you to download and edit code from Git repos directly in Home Assistant.
+
+### Using ESPHome Device Builder
+
+The [ESPHome Device Builder Add-on](https://esphome.io/guides/getting_started_hassio/) lets you build and install ESPHome configurations onto your devices.
+
+## 🖥️ Desktop Development with SDL
+
+The SDL display platform allows you to develop and test your UI on a desktop system running Linux or MacOS. This is much faster than flashing to hardware for every change.
+
+```yaml
+packages:
+  hardware: !include esphome-modular-lvgl-buttons/hardware/SDL-lvgl.yaml
+```
+
+## 📁 Project Structure
+
+```
+esphome-modular-lvgl-buttons/
+├── README.md                 # This file
+├── LICENSE                   # MIT License
+├── secrets.yaml              # Template for secrets
+├── assets/                   # Images, icons, and fonts
+├── buttons/                  # Reusable button components
+├── common/                   # Shared configuration
+├── custom_components/        # Home Assistant custom components
+├── example_code/             # Basic example configurations
+├── example_code_advanced/    # Advanced example configurations
+├── hardware/                 # Hardware-specific configurations
+├── homeassistant_config/     # Home Assistant configuration examples
+├── pages/                    # Full-screen page layouts
+├── sensors/                  # Sensor configurations
+├── solar/                    # Solar monitoring components
+├── tides/                    # NOAA tide components
+├── weather_homeassistant/    # Weather display components
+└── widgets/                  # Reusable UI widgets
+```
+
+## 📝 Device-Specific Notes
+
+### Guition ESP32-4848S040 (4.0" Square)
+
+A great compact screen with built-in 120V/240V relays for direct light control. Includes boot screen, automatic backlight dimming at night, and buttons for controlling local and Home Assistant devices.
+
+### Guition ESP32-JC8048W550 (5.0")
+
+One of the best screens available - bright IPS display, 16MB flash, Qwiic (I2C) port, speaker port, and low cost.
+
+### Guition ESP32-jc4827w543C (4.3")
+
+Excellent screen with very bright IPS display at ~$20 USD. Note: Only 4MB flash (2MB usable in ESPHome), so code size is limited. Has DAC + AMP for audio but fitting audio code in 2MB is challenging.
+
+### Sunton ESP32-8048S070 (7.0")
+
+The largest and highest resolution affordable screen. Excellent touch screen and good dimming ability - ideal for information displays.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📄 License
