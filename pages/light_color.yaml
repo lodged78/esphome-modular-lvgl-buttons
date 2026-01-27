@@ -37,23 +37,6 @@ globals:
     type: bool
     initial_value: 'false'
 
-  # Flags to track when user is actively dragging sliders (prevents feedback loop)
-  - id: ${widget_name}_brightness_dragging
-    type: bool
-    initial_value: 'false'
-
-  - id: ${widget_name}_saturation_dragging
-    type: bool
-    initial_value: 'false'
-
-  - id: ${widget_name}_hue_dragging
-    type: bool
-    initial_value: 'false'
-
-  - id: ${widget_name}_temp_dragging
-    type: bool
-    initial_value: 'false'
-
 binary_sensor:
   # Track light state (on/off)
   - platform: homeassistant
@@ -109,7 +92,7 @@ text_sensor:
     on_value:
       - if:
           condition:
-            lambda: 'return x != "None" && !x.empty() && !id(${widget_name}_brightness_dragging);'
+            lambda: 'return x != "None" && !x.empty();'
           then:
             - lambda: |-
                 float brightness = atof(x.c_str());
@@ -128,7 +111,7 @@ text_sensor:
     on_value:
       - if:
           condition:
-            lambda: 'return x != "None" && !x.empty() && !id(${widget_name}_temp_dragging);'
+            lambda: 'return x != "None" && !x.empty();'
           then:
             - lambda: |-
                 float temp = atof(x.c_str());
@@ -152,7 +135,7 @@ text_sensor:
     on_value:
       - if:
           condition:
-            lambda: "return x != \"None\" && !x.empty() && !id(${widget_name}_saturation_dragging) && !id(${widget_name}_hue_dragging);"
+            lambda: 'return x != "None" && !x.empty();'
           then:
             - lambda: |-
                 std::string s = x;
@@ -322,25 +305,14 @@ lvgl:
                     radius: 0
                     bg_color: misty_blue
                   
-                  # Set dragging flag when user starts interacting
-                  on_press:
-                    - globals.set:
-                        id: ${widget_name}_brightness_dragging
-                        value: 'true'
-                  
                   # on_value to update the light color in real time
                   on_value:
                     - globals.set:
                         id: ${widget_name}_current_brightness
                         value: !lambda return int(x);
                     - script.execute: ${widget_name}_update_lightbulb_color
-                    - script.execute: ${widget_name}_send_brightness
                   
                   on_release:
-                    - globals.set:
-                        id: ${widget_name}_brightness_dragging
-                        value: 'false'
-                    - script.stop: ${widget_name}_send_brightness
                     - homeassistant.action:
                         action: light.turn_on
                         data:
@@ -385,25 +357,14 @@ lvgl:
                     radius: 0
                     bg_color: misty_blue
                   
-                  # Set dragging flag when user starts interacting
-                  on_press:
-                    - globals.set:
-                        id: ${widget_name}_saturation_dragging
-                        value: 'true'
-                  
                   # on_value to update the light color in real time
                   on_value:
                     - globals.set:
                         id: ${widget_name}_current_saturation
                         value: !lambda return x;
                     - script.execute: ${widget_name}_update_lightbulb_color
-                    - script.execute: ${widget_name}_send_hs_color
                   
                   on_release:
-                    - globals.set:
-                        id: ${widget_name}_saturation_dragging
-                        value: 'false'
-                    - script.stop: ${widget_name}_send_hs_color
                     - homeassistant.action:
                         action: light.turn_on
                         data:
@@ -571,25 +532,14 @@ lvgl:
                           border_width: 4
                           shadow_opa: transp
 
-                        # Set dragging flag when user starts interacting
-                        on_press:
-                          - globals.set:
-                              id: ${widget_name}_hue_dragging
-                              value: 'true'
-
                         # on_value to update the light color in real time
                         on_value:
                           - globals.set:
                               id: ${widget_name}_current_hue
                               value: !lambda return x;
                           - script.execute: ${widget_name}_update_lightbulb_color
-                          - script.execute: ${widget_name}_send_hs_color
 
                         on_release:
-                          - globals.set:
-                              id: ${widget_name}_hue_dragging
-                              value: 'false'
-                          - script.stop: ${widget_name}_send_hs_color
                           - homeassistant.action:
                               action: light.turn_on
                               data:
@@ -628,25 +578,14 @@ lvgl:
                           border_width: 4
                           shadow_opa: transp
 
-                        # Set dragging flag when user starts interacting
-                        on_press:
-                          - globals.set:
-                              id: ${widget_name}_temp_dragging
-                              value: 'true'
-
                         # on_value to update the light color in real time
                         on_value:
                           - globals.set:
                               id: ${widget_name}_current_color_temp
                               value: !lambda return x;
                           - script.execute: ${widget_name}_update_lightbulb_color
-                          - script.execute: ${widget_name}_send_color_temp
 
                         on_release:
-                          - globals.set:
-                              id: ${widget_name}_temp_dragging
-                              value: 'false'
-                          - script.stop: ${widget_name}_send_color_temp
                           - homeassistant.action:
                               action: light.turn_on
                               data:
@@ -717,45 +656,6 @@ lvgl:
                   time: 300ms
 
 script:
-  # ═══════════════════════════════════════════════════════════════════════════
-  # REAL-TIME LIGHT UPDATE SCRIPTS (throttled to ~100ms)
-  # Using mode: restart ensures rapid calls just restart the delay timer
-  # ═══════════════════════════════════════════════════════════════════════════
-  
-  - id: ${widget_name}_send_brightness
-    mode: restart
-    then:
-      - delay: 100ms
-      - homeassistant.action:
-          action: light.turn_on
-          data:
-            entity_id: "${light_entity}"
-            brightness: !lambda return id(${widget_name}_current_brightness);
-
-  - id: ${widget_name}_send_hs_color
-    mode: restart
-    then:
-      - delay: 100ms
-      - homeassistant.action:
-          action: light.turn_on
-          data:
-            entity_id: "${light_entity}"
-          data_template:
-            hs_color: "{{ (hue|float, sat|float)|list }}"
-          variables:
-            hue: !lambda return id(${widget_name}_current_hue);
-            sat: !lambda return id(${widget_name}_current_saturation);
-
-  - id: ${widget_name}_send_color_temp
-    mode: restart
-    then:
-      - delay: 100ms
-      - homeassistant.action:
-          action: light.turn_on
-          data:
-            entity_id: "${light_entity}"
-            color_temp_kelvin: !lambda return (int)id(${widget_name}_current_color_temp);
-
   # ═══════════════════════════════════════════════════════════════════════════
   # SCRIPT: Toggle between color_temp and hs modes
   # ═══════════════════════════════════════════════════════════════════════════
