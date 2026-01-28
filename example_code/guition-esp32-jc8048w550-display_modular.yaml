@@ -21,7 +21,7 @@ substitutions:
   screen_night_hour: '0'
   screen_night_minute: '0'
   # Set touchscreen idle timeout - In night mode backlight goes off after this amount of time
-  touchscreen_idle_timeout: "5s"
+  touchscreen_idle_timeout: "60s"
 
 
 esphome:

@@ -11,18 +11,17 @@ substitutions:
   label_on_color: "white"
   label_off_color: "gray"
   button_text_color: "white"
-  touchscreen_idle_timeout: "30s"
-  touchscreen_daytime_brightness: "100%"
-  touchscreen_nighttime_brightness: "50%"
-  # Boot screen configuration
-  boot_screen_delay: 60s
 
   # LCD backlight modes - Code in backlight.yaml
-  # Day mode is set to Sunrise
-  # Evening mode is set to sunset
-  # Set Night mode  at Mightnight here
+  # Set Day mode - starts at Sunrise - screen at 100%
+  touchscreen_daytime_brightness: "100%"
+  # Set Evening mode -  starts at Sunset - screen at 50% (may need to be brighter for some screens)
+  touchscreen_nighttime_brightness: "50%"
+  # Set Night mode - starts at Mightnight (or some other time you set here) - screen backlight is off
   screen_night_hour: '0'
   screen_night_minute: '0'
+  # Set touchscreen idle timeout - In night mode backlight goes off after this amount of time
+  touchscreen_idle_timeout: "60s"
 
 esphome:
   name: "guition-esp32-p4-jc8012p4a1"
