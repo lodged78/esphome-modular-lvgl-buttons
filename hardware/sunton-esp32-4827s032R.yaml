@@ -3,8 +3,13 @@
 # http://pan.jczn1688.com/directlink/1/ESP32%20module/4.3inch_ESP32-4827S043.zip
 # https://www.aliexpress.com/item/1005008646666037.html
 
+substitutions:
+  # Screen Size
+  screen_height: 280
+  screen_width: 480
+
 esphome:
-  min_version: 2025.12.0
+  min_version: 2026.1.0
   project:
     name: "Sunton.ESP32-4827s032R"
     version: "1.0"
@@ -48,8 +53,8 @@ light:
 spi:
   - id: spi_touch
     clk_pin: 12
-    mosi_pin: 11 # 11 #este pin  es dout #32  
-    miso_pin: 13 #13 #este pin es input #39
+    mosi_pin: 11 
+    miso_pin: 13
 
 touchscreen:
   - id: my_touchscreen
@@ -68,17 +73,17 @@ touchscreen:
       swap_xy: true 
       mirror_x: false
       mirror_y: true
-    on_touch:
-      - lambda: |-
-            ESP_LOGI("ON_TOUCH", "ON_TOUCH");
+    # on_touch:
+      # - lambda: |-
+            # ESP_LOGI("ON_TOUCH", "ON_TOUCH");
     
-      - lambda: |-
-            ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
-              touch.x,
-              touch.y,
-              touch.x_raw,
-              touch.y_raw
-            );
+      # - lambda: |-
+            # ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+              # touch.x,
+              # touch.y,
+              # touch.x_raw,
+              # touch.y_raw
+            # );
 
 display:
   - id: my_display
