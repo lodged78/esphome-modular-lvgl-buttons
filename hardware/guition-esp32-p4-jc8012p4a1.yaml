@@ -1,4 +1,4 @@
-# Guition-ESP32-P4-JC8012P4A1 Smart Screen
+# Guition-ESP32-P4-JC8012P4A1 1280 x 800 Smart Screen
 #
 # Hardware configuration file
 
@@ -10,7 +10,7 @@ external_components:
 
 substitutions:
   # Screen Size
-  screen_height: 1200
+  screen_height: 1280
   screen_width: 800
 
 esphome:
@@ -46,7 +46,6 @@ preferences:
 #-------------------------------------------
 # Network hardware
 #-------------------------------------------  
-  
 esp32_hosted:
   variant: ESP32C6
   reset_pin: GPIO54
@@ -126,14 +125,16 @@ display:
     dimensions:
       width: 800
       height: 1280
-
-# Special LVGL settings required for this display  
-lvgl:
-  byte_order: little_endian
   
 # -------------------------------------------
 # Audio - speaker/mic
 # ------------------------------------------- 
+i2s_audio:
+  - id: i2s_output
+    i2s_lrclk_pin: GPIO10
+    i2s_bclk_pin: GPIO12
+    i2s_mclk_pin: GPIO13
+
 audio_dac:
   - platform: es8311
     id: es8311_dac
@@ -141,11 +142,13 @@ audio_dac:
     sample_rate: 16000
     use_microphone: True
 
-i2s_audio:
-  - id: i2s_output
-    i2s_lrclk_pin: GPIO10
-    i2s_bclk_pin: GPIO12
-    i2s_mclk_pin: GPIO13
+microphone:
+  - platform: i2s_audio
+    id: p4_microphone
+    i2s_din_pin: GPIO11
+    sample_rate: 16000
+    bits_per_sample: 16bit
+    adc_type: external
 
 speaker:
   - platform: i2s_audio
@@ -181,16 +184,6 @@ media_player:
         speaker: announcement_spk_resampling_input
         num_channels: 1
         
-microphone:
-  - platform: i2s_audio
-    id: p4_microphone
-    i2s_din_pin: GPIO11
-    sample_rate: 16000
-    bits_per_sample: 16bit
-    adc_type: external
 
-#audio_adc:
-#  - platform: es8311
-#    id: es8311_adc
-#    bits_per_sample: 16bit
-#    sample_rate: 16000
+
+
