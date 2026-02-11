@@ -46,6 +46,7 @@ light:
     name: ${ha_name}
     platform: binary
     output: $entity_id
+    icon: mdi:lightbulb-on
     on_turn_on:
       then:
         - lvgl.widget.update:

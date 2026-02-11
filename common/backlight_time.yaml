@@ -36,9 +36,6 @@ time:
   - platform: homeassistant
     id: system_time
     on_time_sync:
-      - logger.log:
-          level: INFO
-          format: "Update time display on boot"
       - script.execute: time_update
       
       # Update last restart time (only once)
@@ -49,11 +46,10 @@ time:
             - text_sensor.template.publish:
                 id: device_last_restart
                 state: !lambda 'return id(system_time).now().strftime("%a %d %b %Y - %I:%M:%S %p");'
-
-      - logger.log:
-          level: INFO
-          format: "Setting brightness on mode boot"
-      - script.execute: set_brightness_mode_on_boot
+            - logger.log:
+                level: INFO
+                format: "Setting brightness mode on boot"
+            - script.execute: set_brightness_mode_on_boot
 
     on_time:
       # Trigger night mode at configured time
@@ -77,7 +73,27 @@ lvgl:
       - logger.log:
           level: INFO
           format: "LVGL is idle"
-      - script.execute: apply_brightness_mode
+      - if:
+          condition:
+            lambda: 'return id(brightness_mode).current_option() == "Day";'
+          then:
+            - light.turn_on:
+                id: display_backlight
+                brightness: ${touchscreen_daytime_brightness}
+      - if:
+          condition:
+            lambda: 'return id(brightness_mode).current_option() == "Evening";'
+          then:
+            - light.turn_on:
+                id: display_backlight
+                brightness: ${touchscreen_nighttime_brightness}
+      - if:
+          condition:
+            lambda: 'return id(brightness_mode).current_option() == "Night";'
+          then:
+            - light.turn_off: display_backlight
+            - lvgl.pause:
+                show_snow: true         
 
 # Wake on screen touch - extends the touchscreen defined in hardware file
 touchscreen:
@@ -147,9 +163,6 @@ script:
   # ─────────────────────────────────────────────────────────────────────────────
   - id: set_brightness_mode_on_boot
     then:
-      - logger.log:
-          level: INFO
-          format: "Setting brightness mode on boot"
       - if:
           condition:
             sun.is_above_horizon:
