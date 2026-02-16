@@ -4,71 +4,72 @@
 [![ESPHome](https://img.shields.io/badge/ESPHome-2025.x-blue)](https://esphome.io)
 [![Home Assistant](https://img.shields.io/badge/Home%20Assistant-Integration-41BDF5)](https://www.home-assistant.io/)
 
-A modular library for building beautiful, touch-enabled control panels using ESPHome and LVGL on affordable ESP32 touchscreen devices. Perfect for smart home dashboards, room controllers, lighting control, and information displays.
+A modular library for building beautiful, touch-enabled control panels using ESPHome and LVGL on ESP32 based touchscreen devices. Perfect for smart home dashboards, room controllers, lighting control, and information displays.
 
 ## ✨ Features
 
 - **Modular Design** - Mix and match components to build your perfect interface
 - **Home Assistant Integration** - Seamless control of your smart home devices
-- **Multiple Screen Sizes** - Support for displays from 2.8" to 7.0"
+- **Multiple Screen Sizes** - Support for displays from 2.8" to 10"
 - **Pre-built Components** - Ready-to-use buttons, pages, widgets, and sensors
-- **Weather Display** - 4-day forecast and current conditions from Home Assistant
-- **Tide Information** - NOAA tide and buoy data integration
+- **Weather Display** - 4-day forecast and current conditions from Home Assistant or direct from Pirate Weather
+- **Tide Information** - NOAA tide integration
 - **Solar Monitoring** - Solar panel monitoring widgets
 - **Boot Screen** - Professional loading screen with HA connection status
 - **Swipe Navigation** - Navigate between pages with touch gestures
 - **Light Controls** - Dimming, color temperature, and RGB color picker support
-- **Canvas Widgets** - Dynamic LVGL canvas-based color wheels and graphics
 
 ## 📱 Supported Screens
 
 ### Guition Displays
 
-| Model | Size | Resolution | Touch | Features | Link |
-|-------|------|------------|-------|----------|------|
-| `ESP32-4848S040` | 4.0" | 480×480 | Capacitive | 120V/220V relays, built-in power supply, USB-C | [AliExpress](https://www.aliexpress.com/item/3256806436431838.html) |
-| `ESP32-JC8048W550` | 5.0" | 480×800 | Capacitive | 16MB flash, Qwiic (I2C) port, speaker port, USB-C | [AliExpress](https://www.aliexpress.com/item/3256806546911788.html) |
-| `ESP32-JC8048W535` | 3.5" | 480×320 | Capacitive | USB-C | [AliExpress](https://www.aliexpress.com/item/3256806546911788.html) |
-| `ESP32-jc4827w543C` | 4.3" | 272×480 | Capacitive | Bright IPS display, DAC + AMP, speaker connector, USB-C | [AliExpress](https://www.aliexpress.com/item/3256806543342794.html) |
-| `ESP32-P4-JC1060P470` | 4.7" | 1060×600 | Capacitive | ESP32-P4 based, USB-C | [AliExpress](https://www.aliexpress.com/item/3256808075855498.html) |
-| `ESP32-P4-JC8012P4A1` | 8.0" | 800×1280 | Capacitive | ESP32-P4 based, USB-C | [AliExpress](https://www.aliexpress.com/item/3256808075855498.html) |
+| Model | Size | Resolution | Flash | Touch | Features | Link |
+|-------|------|------------|-------|-------|----------|------|
+| `ESP32-4848S040` | 4.0" | 480×480 | 16MB | Capacitive | 120V/220V relays, built-in 120V/220V power supply | [AliExpress](https://www.aliexpress.com/item/3256806436431838.html) |
+| `ESP32-JC8048W550` | 5.0" | 480×800 | 16MB | Capacitive | Qwiic (I2C) port, speaker | [AliExpress](https://www.aliexpress.com/item/3256806546911788.html) |
+| `ESP32-JC8048W535` | 3.5" | 480×320 | 16MB | Capacitive | USB-C | [AliExpress](https://www.aliexpress.com/item/3256806546911788.html) |
+| `ESP32-jc4827w543C` | 4.3" | 272×480 | 4MB | Capacitive | speaker, 4MB flash keep you code small| [AliExpress](https://www.aliexpress.com/item/3256806543342794.html) |
+| `ESP32-P4-JC4880P443` | 4.3" | 480×800 | 16MB | Capacitive | ESP32-P4 based, speaker, mic, USB-C | [AliExpress](https://www.aliexpress.com/item/3256808075855498.html) |
+| `ESP32-P4-JC1060P470` | 4.7" | 1060×600 | 16MB | Capacitive | ESP32-P4 based, USB-C | [AliExpress](https://www.aliexpress.com/item/3256808075855498.html) |
+| `ESP32-P4-JC8012P4A1` | 8.0" | 800×1280 | 16MB | Capacitive | ESP32-P4 based, USB-C | [AliExpress](https://www.aliexpress.com/item/3256808075855498.html) |
 
 ### Sunton Displays
 
-| Model | Size | Resolution | Touch | Features | Link |
-|-------|------|------------|-------|----------|------|
-| `ESP32-8048S043` | 4.3" | 480×272 | Capacitive | USB-C | [AliExpress](https://www.aliexpress.com/item/3256807713569037.html) |
-| `ESP32-8048S050` | 5.0" | 480×800 | Capacitive | USB-C | [AliExpress](https://www.aliexpress.com/item/1005004952694042.html) |
-| `ESP32-8048S070` | 7.0" | 480×800 | Capacitive | Large display, great for info displays, USB-C | [AliExpress](https://www.aliexpress.com/item/3256807882909237.html) |
-| `ESP32-2432S028` | 2.8" | 320×240 | Capacitive | Micro USB, popular "Cheap Yellow Display" | [AliExpress](https://www.aliexpress.com/item/3256805607954786.html) |
-| `ESP32-2432S028R` | 2.8" | 320×240 | Resistive | Micro USB, resistive touch variant | [AliExpress](https://www.aliexpress.com/item/3256805607954786.html) |
-| `ESP32-4827S032R` | 3.2" | 480×320 | Resistive | USB-C | [AliExpress](https://www.aliexpress.com/item/3256806197292489.html) |
+| Model | Size | Resolution | Flash | Touch | Features | Link |
+|-------|------|------------|-------|-------|----------|------|
+| `ESP32-8048S043` | 4.3" | 480×272 | 16MB | Capacitive | USB-C | [AliExpress](https://www.aliexpress.com/item/3256807713569037.html) |
+| `ESP32-8048S050` | 5.0" | 480×800 | 16MB | Capacitive | USB-C | [AliExpress](https://www.aliexpress.com/item/1005004952694042.html) |
+| `ESP32-8048S070` | 7.0" | 480×800 | 16MB | Capacitive | Large display, great for info displays, USB-C | [AliExpress](https://www.aliexpress.com/item/3256807882909237.html) |
+| `ESP32-2432S028` | 2.8" | 320×240 | 4MB | Capacitive | Micro USB, popular "Cheap Yellow Display" | [AliExpress](https://www.aliexpress.com/item/3256805607954786.html) |
+| `ESP32-2432S028R` | 2.8" | 320×240 | 4MB | Resistive | Micro USB, resistive touch variant | [AliExpress](https://www.aliexpress.com/item/3256805607954786.html) |
+| `ESP32-4827S032R` | 3.2" | 480×320 | 16MB | Resistive | USB-C | [AliExpress](https://www.aliexpress.com/item/3256806197292489.html) |
 
 ### Waveshare Displays
 
-| Model | Size | Resolution | Touch | Features | Link |
-|-------|------|------------|-------|----------|------|
-| `ESP32-S3-Touch-LCD-7` | 7.0" | 800×480 | Capacitive | USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
-| `ESP32-S3-Touch-LCD-7B` | 7.0" | 800×480 | Capacitive | Variant B with different touch IC, USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7b.htm) |
-| `ESP32-S3-Touch-LCD-4.3` | 4.3" | 800×480 | Capacitive | USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-4.3.htm) |
-| `ESP32-S3-Touch-LCD-2.8C` | 2.8" | 320×240 | Capacitive | USB-C, compact form factor | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-2.8.htm) |
-| `ESP32-P4-WiFi6-Touch-LCD-7B` | 7.0" | 800×480 | Capacitive | ESP32-P4, WiFi 6, USB-C | [Waveshare](https://www.waveshare.com/esp32-p4-touch-lcd-7b.htm) |
-| `ESP32-P4-86-Panel` | 4.0" | 480×480 | Capacitive | ESP32-P4 based, 86mm panel form factor | [Waveshare](https://www.waveshare.com/esp32-p4-nano.htm) |
+| Model | Size | Resolution | Flash | Touch | Features | Link |
+|-------|------|------------|-------|-------|----------|------|
+| `ESP32-S3-Touch-LCD-7` | 7.0" | 800×480 | 16MB | Capacitive | USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7.htm) |
+| `ESP32-S3-Touch-LCD-7B` | 7.0" | 800×480 | 16MB | Capacitive | Variant B with different touch IC, USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-7b.htm) |
+| `ESP32-S3-Touch-LCD-4.3` | 4.3" | 800×480 | 16MB | Capacitive | USB-C | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-4.3.htm) |
+| `ESP32-S3-Touch-LCD-2.8C` | 2.8" | 320×240 | 16MB | Capacitive | USB-C, compact form factor | [Waveshare](https://www.waveshare.com/esp32-s3-touch-lcd-2.8.htm) |
+| `ESP32-P4-WiFi6-Touch-LCD-7B` | 7.0" | 1024×600 | 32MB | Capacitive | speaker, mic, USB-C | [Waveshare](https://www.waveshare.com/esp32-p4-touch-lcd-7b.htm) |
+| `ESP32-P4-WiFi6-Touch-LCD-10.1` | 10.1" | 800×1280 | 32MB | Capacitive |  speaker, mic, USB-C | [Waveshare](https://www.waveshare.com/esp32-p4-wifi6-touch-lcd-10.1.htm) |
+| `ESP32-P4-86-Panel` | 4.0" | 480×480 | 32MB | Capacitive | speaker, mic, 86mm panel form factor | [Waveshare](https://www.waveshare.com/esp32-p4-nano.htm) |
 
 ### Elecrow Displays
 
-| Model | Size | Resolution | Touch | Features | Link |
-|-------|------|------------|-------|----------|------|
-| `CrowPanel DIS05035H` (v2.2) | 3.5" | 480×320 | Resistive | USB-C | [Elecrow](https://www.elecrow.com/esp32-display-3-5-inch-hmi-display-spi-tft-lcd-touch-screen.html) |
-| `Elecrow ESP32 7inch` | 7.0" | 800×480 | Capacitive | USB-C, wide viewing angle | [Elecrow](https://www.elecrow.com/esp32-display-7-inch-hmi-display-rgb-tft-lcd-touch-screen-support-lvgl.html) |
+| Model | Size | Resolution | Flash | Touch | Features | Link |
+|-------|------|------------|-------|-------|----------|------|
+| `CrowPanel DIS05035H` (v2.2) | 3.5" | 480×320 | 4MB | Resistive | USB-C | [Elecrow](https://www.elecrow.com/esp32-display-3-5-inch-hmi-display-spi-tft-lcd-touch-screen.html) |
+| `Elecrow ESP32 7inch` | 7.0" | 800×480 | 16MB | Capacitive | USB-C, wide viewing angle | [Elecrow](https://www.elecrow.com/esp32-display-7-inch-hmi-display-rgb-tft-lcd-touch-screen-support-lvgl.html) |
 
 ### Other Devices
 
-| Model | Size | Resolution | Touch | Features | Link |
-|-------|------|------------|-------|----------|------|
-| `ESP32-S3-Box-3` | 2.4" | 320×240 | Capacitive | Espressif official dev kit with case | [Espressif](https://www.espressif.com/en/products/devkits/esp-box/overview) |
-| `LilyGo T-Display-S3` | 1.9" | 170×320 | Capacitive | Compact form factor | [LilyGo](https://www.lilygo.cc/products/t-display-s3) |
-| `SDL Display` | Variable | Variable | Mouse | Desktop testing on Linux/MacOS | N/A |
+| Model | Size | Resolution | Flash | Touch | Features | Link |
+|-------|------|------------|-------|-------|----------|------|
+| `ESP32-S3-Box-3` | 2.4" | 320×240 | 16MB | Capacitive | Espressif official dev kit with case | [Espressif](https://www.espressif.com/en/products/devkits/esp-box/overview) |
+| `LilyGo T-Display-S3` | 1.9" | 170×320 | 16MB | Capacitive | Compact form factor | [LilyGo](https://www.lilygo.cc/products/t-display-s3) |
+| `SDL Display` | Variable | Variable | N/A | Mouse | Desktop testing on Linux/MacOS | N/A |
 
 ## 🧩 Available Components
 
@@ -97,7 +98,6 @@ A modular library for building beautiful, touch-enabled control panels using ESP
 | Component | Description |
 |-----------|-------------|
 | `swipe_navigation.yaml` | Enable swipe gestures for page navigation |
-| `color_wheel_canvas.yaml` | LVGL canvas-based RGB color wheel (semicircle, all hues) |
 
 ### Sensors (`sensors/`)
 
