@@ -73,16 +73,16 @@ touchscreen:
       mirror_x: false
       mirror_y: false
       # on_touch:
-            # - logger.log:
-            # format: Touch at (%d, %d)
-            # args: [touch.x, touch.y]
-            # - lambda: |-
-                # ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
-                # touch.x,
-                # touch.y,
-                # touch.x_raw,
-                # touch.y_raw
-                # );
+      #   - logger.log:
+      #   format: Touch at (%d, %d)
+      #   args: [touch.x, touch.y]
+      #   - lambda: |-
+      #       ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+      #       touch.x,
+      #       touch.y,
+      #       touch.x_raw,
+      #       touch.y_raw
+      #       );
 
 # -------------------------------------------
 # Backlight
@@ -119,7 +119,7 @@ display:
       width: 1024
       height: 600
 
-# Special LVGL settings required for this display  
+# Special LVGL settings required for this display
 lvgl:
   byte_order: little_endian
 

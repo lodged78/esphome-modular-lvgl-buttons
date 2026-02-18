@@ -1,6 +1,7 @@
 # Guition ESP32-S3-4848S040 480px X 480px Smart Screen
 #
 # Hardware configuration file
+---
 
 substitutions:
   # Screen Size
@@ -19,7 +20,7 @@ esp32:
   framework:
     type: esp-idf
     advanced:
-       execute_from_psram: true
+      execute_from_psram: true
 
 psram:
   mode: octal
@@ -34,11 +35,12 @@ preferences:
 output:
   # Backlight LED
   - platform: ledc
-    pin: GPIO38  
+    pin: GPIO38
     id: gpio_backlight_pwm
     frequency: 100Hz
 
-  # Built in 240v/120v relay - Some versions of this switch have 3 relays some have 1
+  # Built in 240v/120v relay
+  # Some versions of this switch have 3 relays some have 1
   - id: internal_relay_1
     platform: gpio
     pin: GPIO40
@@ -75,17 +77,17 @@ touchscreen:
   i2c_id: bus_a
   transform:
     mirror_x: false
-  # on_touch:
-    # - logger.log:
-          # format: Touch at (%d, %d)
-          # args: [touch.x, touch.y]
-    # - lambda: |-
-          # ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
-              # touch.x,
-              # touch.y,
-              # touch.x_raw,
-              # touch.y_raw
-              # );
+#   on_touch:
+#     - logger.log:
+#           format: Touch at (%d, %d)
+#           args: [touch.x, touch.y]
+#     - lambda: |-
+#           ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+#               touch.x,
+#               touch.y,
+#               touch.x_raw,
+#               touch.y_raw
+#               );
 
 # -------------------------------------------
 # Display st7701s spi
@@ -99,11 +101,11 @@ display:
   - platform: st7701s
     id: my_display
     update_interval: never
-    auto_clear_enabled: False
+    auto_clear_enabled: false
     spi_mode: MODE3
     data_rate: 2MHz
     color_order: RGB
-    invert_colors: False
+    invert_colors: false
     dimensions:
       width: 480
       height: 480
@@ -113,7 +115,7 @@ display:
     vsync_pin: GPIO17
     pclk_pin: GPIO21
     pclk_frequency: 12MHz
-    pclk_inverted: False
+    pclk_inverted: false
     hsync_pulse_width: 8
     hsync_front_porch: 10
     hsync_back_porch: 20
@@ -123,25 +125,25 @@ display:
     init_sequence:
       - 1
       # Custom sequences are an array, first byte is command, the rest are data.
-      - [ 0xFF, 0x77, 0x01, 0x00, 0x00, 0x10 ] # CMD2_BKSEL_BK0
-      - [ 0xCD, 0x00 ] # disable MDT flag
+      - [0xFF, 0x77, 0x01, 0x00, 0x00, 0x10]  # CMD2_BKSEL_BK0
+      - [0xCD, 0x00]  # disable MDT flag
     data_pins:
       red:
-        - 11        #r1
-        - 12        #r2
-        - 13        #r3
-        - 14        #r4
-        - 0         #r5
+        - 11        # r1
+        - 12        # r2
+        - 13        # r3
+        - 14        # r4
+        - 0         # r5
       green:
-        - 8         #g0
-        - 20        #g1
-        - 3         #g2
-        - 46        #g3
-        - 9         #g4
-        - 10        #g5
+        - 8         # g0
+        - 20        # g1
+        - 3         # g2
+        - 46        # g3
+        - 9         # g4
+        - 10        # g5
       blue:
-        - 4         #b1
-        - 5         #b2
-        - 6         #b3
-        - 7         #b4
-        - 15        #b5
+        - 4         # b1
+        - 5         # b2
+        - 6         # b3
+        - 7         # b4
+        - 15        # b5

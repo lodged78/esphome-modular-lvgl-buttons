@@ -1,6 +1,7 @@
 # guition-esp32-jc8048w550 5-inch IPS 800*480 Smart Screen
 #
 # Hardware configuration file
+---
 
 substitutions:
   # Screen Size
@@ -19,7 +20,7 @@ esp32:
   framework:
     type: esp-idf
     advanced:
-       execute_from_psram: true
+      execute_from_psram: true
 
 psram:
   mode: octal
@@ -47,9 +48,9 @@ light:
     icon: mdi:lightbulb-on
     restore_mode: ALWAYS_ON
 
-#-------------------------------------------
+# -------------------------------------------
 # Touchscreen gt911
-#-------------------------------------------
+# -------------------------------------------
 i2c:
   - id: bus_a
     sda: GPIO19
@@ -63,27 +64,27 @@ touchscreen:
     address: 0x5D
     update_interval: 16ms
     # on_touch:
-      # - logger.log:
-            # format: Touch at (%d, %d)
-            # args: [touch.x, touch.y]
-      # - lambda: |-
-            # ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
-                # touch.x,
-                # touch.y,
-                # touch.x_raw,
-                # touch.y_raw
-                # );    
+    #   - logger.log:
+    #       format: Touch at (%d, %d)
+    #       args: [touch.x, touch.y]
+    #   - lambda: |-
+    #       ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+    #           touch.x,
+    #           touch.y,
+    #           touch.x_raw,
+    #           touch.y_raw
+    #           );
 
-#-------------------------------------------
+# -------------------------------------------
 # Display
-#-------------------------------------------
+# -------------------------------------------
 display:
   - platform: rpi_dpi_rgb
     id: main_display
     color_order: RGB
-    invert_colors: True
+    invert_colors: true
     update_interval: never
-    auto_clear_enabled: false # takes 2.8 seconds to clear the display
+    auto_clear_enabled: false  # takes 2.8 seconds to clear the display
     dimensions:
       width: 800
       height: 480

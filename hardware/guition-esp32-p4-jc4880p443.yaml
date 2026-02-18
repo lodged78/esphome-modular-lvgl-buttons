@@ -21,7 +21,7 @@ esp32:
   framework:
     type: esp-idf
     advanced:
-      enable_idf_experimental_features: yes
+      enable_idf_experimental_features: true
     sdkconfig_options:
       CONFIG_SPIRAM_XIP_FROM_PSRAM: y
 
@@ -52,7 +52,7 @@ esp32_hosted:
 output:
   # Backlight LED
   - platform: ledc
-    pin: GPIO23  
+    pin: GPIO23
     id: gpio_backlight_pwm
     frequency: 100Hz
     inverted: false
@@ -81,11 +81,11 @@ switch:
 
 # -------------------------------------------
 # i2c bus
-# -------------------------------------------    
+# -------------------------------------------
 i2c:
   - id: bus_a
-    sda: GPIO7  
-    scl: GPIO8  
+    sda: GPIO7
+    scl: GPIO8
     scan: true
     frequency: 400kHz
 
@@ -116,13 +116,13 @@ display:
       width: 480
       height: 800
 
-# Special LVGL settings required for this display  
+# Special LVGL settings required for this display
 lvgl:
   byte_order: little_endian
 
 # -------------------------------------------
 # Audio - speaker/mic
-# ------------------------------------------- 
+# -------------------------------------------
 i2s_audio:
   - id: i2s_audio_bus
     i2s_lrclk_pin: GPIO10

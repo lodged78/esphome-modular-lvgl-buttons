@@ -1,6 +1,7 @@
 # Guition-ESP32-P4-JC1060P470 7" Capacitive touch
 #
 # Hardware configuration file
+---
 
 substitutions:
   # Screen Size
@@ -26,23 +27,23 @@ esp_ldo:
   - channel: 3
     id: dsi_phy_enable
     voltage: 2.5V
-    adjustable: True
+    adjustable: true
   - channel: 4
     id: sd_card_power
     voltage: 2.7V
-    adjustable: True
+    adjustable: true
 
 psram:
   mode: hex
   speed: 200MHz
-  
+
 preferences:
   flash_write_interval: 5min
-  
-#-------------------------------------------
+
+# -------------------------------------------
 # Network hardware
-#-------------------------------------------  
-  
+# -------------------------------------------
+
 esp32_hosted:
   variant: ESP32C6
   reset_pin: GPIO54
@@ -52,7 +53,7 @@ esp32_hosted:
   d1_pin: GPIO15
   d2_pin: GPIO16
   d3_pin: GPIO17
-  active_high: true  
+  active_high: true
 
 # -------------------------------------------
 # Internal outputs
@@ -71,14 +72,14 @@ light:
     restore_mode: ALWAYS_ON
     default_transition_length: 0s
     gamma_correct: 1.0
-    
+
 # -------------------------------------------
 # i2c bus
-# -------------------------------------------    
+# -------------------------------------------
 i2c:
   - id: bus_a
-    sda: GPIO7  
-    scl: GPIO8  
+    sda: GPIO7
+    scl: GPIO8
     scan: true
     frequency: 400kHz
 
@@ -90,18 +91,18 @@ touchscreen:
     id: my_touchscreen
     # reset_pin: GPIO23  # Shared with backlight
     interrupt_pin: GPIO21
-  # on_touch:
-    # - logger.log:
-          # format: Touch at (%d, %d)
-          # args: [touch.x, touch.y]
-    # - lambda: |-
-          # ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
-              # touch.x,
-              # touch.y,
-              # touch.x_raw,
-              # touch.y_raw
-              # );
-              
+#   on_touch:
+#     - logger.log:
+#           format: Touch at (%d, %d)
+#           args: [touch.x, touch.y]
+#     - lambda: |-
+#           ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+#               touch.x,
+#               touch.y,
+#               touch.x_raw,
+#               touch.y_raw
+#               );
+
 # -------------------------------------------
 # Display
 # -------------------------------------------
@@ -114,13 +115,13 @@ display:
       number: GPIO05
     hsync_pulse_width: 20
 
-# Special LVGL settings required for this display  
+# Special LVGL settings required for this display
 lvgl:
   byte_order: little_endian
-  
+
 # -------------------------------------------
 # Audio - speaker/mic
-# ------------------------------------------- 
+# -------------------------------------------
 i2s_audio:
   - id: audio_bus
     i2s_lrclk_pin: GPIO10
@@ -189,4 +190,3 @@ switch:
     entity_category: config
     pin: GPIO11
     restore_mode: RESTORE_DEFAULT_ON
-

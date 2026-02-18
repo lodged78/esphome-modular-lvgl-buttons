@@ -13,7 +13,7 @@
 #
 # Modes:
 #   Day     - After sunrise, full brightness
-#   Evening - After sunset, reduced brightness  
+#   Evening - After sunset, reduced brightness
 #   Night   - After night hour, screen off when idle
 # ═══════════════════════════════════════════════════════════════════════════════
 
@@ -37,7 +37,7 @@ time:
     id: system_time
     on_time_sync:
       - script.execute: time_update
-      
+
       # Update last restart time (only once)
       - if:
           condition:
@@ -93,7 +93,7 @@ lvgl:
           then:
             - light.turn_off: display_backlight
             - lvgl.pause:
-                show_snow: true         
+                show_snow: true
 
 # Wake on screen touch - extends the touchscreen defined in hardware file
 touchscreen:
@@ -154,7 +154,7 @@ script:
 
   # ─────────────────────────────────────────────────────────────────────────────
   # Set brightness mode on boot based on sun position and time
-  # Logic: 
+  # Logic:
   #   - Sun above horizon → Day
   #   - Sun below horizon + time >= night_hour → Night
   #   - Sun below horizon + time < night_hour → Evening

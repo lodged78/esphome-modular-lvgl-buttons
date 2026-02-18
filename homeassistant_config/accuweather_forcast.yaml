@@ -16,10 +16,10 @@ template:
         response_variable: hourly
     sensor:
       # - name: weather forecast all
-        # unique_id: weather_forecast_all
-        # state: "OK"
-        # attributes:
-          # forecast: "{{ hourly['weather.home']['forecast'] }}"
+      # unique_id: weather_forecast_all
+      # state: "OK"
+      # attributes:
+      # forecast: "{{ hourly['weather.home']['forecast'] }}"
 
       - name: Weather Forecast
         unique_id: weather_forecast

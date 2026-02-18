@@ -43,7 +43,7 @@ binary_sensor:
     id: ${widget_name}_light_state
     entity_id: "${light_entity}"
     on_state:
-  # On light state change, update the widget color
+      # On light state change, update the widget color
       - script.execute: ${widget_name}_update_lightbulb_color
 
   # Light button control
@@ -51,7 +51,7 @@ binary_sensor:
     id: ${widget_name}_light_btn_control
     widget: ${widget_name}_lightbulb_btn
     on_click:
-  # SHORT press (50-500ms) - ALWAYS toggles the light
+      # SHORT press (50-500ms) - ALWAYS toggles the light
       - min_length: 50ms
         max_length: 500ms
         then:
@@ -61,7 +61,7 @@ binary_sensor:
                 entity_id: "${light_entity}"
           - lambda: |-
               ESP_LOGD("light_btn", "Short press - toggling light");
-      
+
   # LONG press (800-3000ms) - switch mode (only if supported)
       - min_length: 800ms
         max_length: 3000ms
@@ -70,12 +70,12 @@ binary_sensor:
               condition:
                 lambda: |-
                   // Switch mode only if the light supports BOTH modes
-                  return id(${widget_name}_supports_color_temp) && 
+                  return id(${widget_name}_supports_color_temp) &&
                          (id(${widget_name}_supports_hs) || id(${widget_name}_supports_rgb));
               then:
                 - lambda: |-
                     id(${widget_name}_is_temp_mode) = !id(${widget_name}_is_temp_mode);
-                    ESP_LOGD("light_btn", "Long press - switching mode to: %s", 
+                    ESP_LOGD("light_btn", "Long press - switching mode to: %s",
                       id(${widget_name}_is_temp_mode) ? "ColorTemp" : "HS");
                 - script.execute: ${widget_name}_toggle_gradient
               else:
@@ -156,13 +156,13 @@ text_sensor:
             - if:
                 condition:
                   lambda: |-
-                    return !id(${widget_name}_is_temp_mode) && 
+                    return !id(${widget_name}_is_temp_mode) &&
                            (id(${widget_name}_supports_hs) || id(${widget_name}_supports_rgb));
                 then:
                   - lvgl.slider.update:
                       id: ${widget_name}_light_saturation_slider
                       value: !lambda return id(${widget_name}_current_saturation);
-            
+
             # Update the light color when HS changes from HA
             # But only if we're in HS mode
             - if:
@@ -181,19 +181,19 @@ text_sensor:
       - lambda: |-
           // Parse the string with supported modes
           std::string modes = x;
-          
+
           // Check presence of each mode
           id(${widget_name}_supports_color_temp) = (modes.find("color_temp") != std::string::npos);
           id(${widget_name}_supports_hs) = (modes.find("hs") != std::string::npos);
           id(${widget_name}_supports_rgb) = (modes.find("rgb") != std::string::npos);
-          
+
           id(${widget_name}_supports_brightness) = (
             modes.find("brightness") != std::string::npos ||
             id(${widget_name}_supports_hs) ||
             id(${widget_name}_supports_rgb) ||
             id(${widget_name}_supports_color_temp)
           );
-          
+
           ESP_LOGD("light_widget", "═════════════════════════════════════════════════");
           ESP_LOGD("light_widget", "Supported modes: %s", modes.c_str());
           ESP_LOGD("light_widget", "Color temp: %d, HS: %d, RGB: %d, Brightness: %d",
@@ -202,9 +202,9 @@ text_sensor:
             id(${widget_name}_supports_rgb),
             id(${widget_name}_supports_brightness)
           );
-          
+
           // Smart selection of the initial mode
-          
+
           if (id(${widget_name}_supports_hs) || id(${widget_name}_supports_rgb)) {
             // If HS/RGB is supported - start with it (more versatile)
             id(${widget_name}_is_temp_mode) = false;
@@ -218,7 +218,7 @@ text_sensor:
             id(${widget_name}_is_temp_mode) = false;
             ESP_LOGD("light_widget", "→ Initial mode: N/A (no color modes)");
           }
-          
+
           ESP_LOGD("light_widget", "═════════════════════════════════════════════════");
       - script.execute: ${widget_name}_update_widget_visibility
 
@@ -226,7 +226,7 @@ text_sensor:
     id: ${widget_name}_light_name
     entity_id: "${light_entity}"
     attribute: friendly_name
-    on_value: 
+    on_value:
       then:
         - lvgl.label.update:
             id: ${widget_name}_light_name_label
@@ -304,21 +304,21 @@ lvgl:
                   indicator:
                     radius: 0
                     bg_color: misty_blue
-                  
+
                   # on_value to update the light color in real time
                   on_value:
                     - globals.set:
                         id: ${widget_name}_current_brightness
                         value: !lambda return int(x);
                     - script.execute: ${widget_name}_update_lightbulb_color
-                  
+
                   on_release:
                     - homeassistant.action:
                         action: light.turn_on
                         data:
                           entity_id: "${light_entity}"
                           brightness: !lambda return int(x);
-              
+
               # Brightness icon at bottom
               - label:
                   align: bottom_mid
@@ -356,14 +356,14 @@ lvgl:
                   indicator:
                     radius: 0
                     bg_color: misty_blue
-                  
+
                   # on_value to update the light color in real time
                   on_value:
                     - globals.set:
                         id: ${widget_name}_current_saturation
                         value: !lambda return x;
                     - script.execute: ${widget_name}_update_lightbulb_color
-                  
+
                   on_release:
                     - homeassistant.action:
                         action: light.turn_on
@@ -374,7 +374,7 @@ lvgl:
                         variables:
                           hue: !lambda return id(${widget_name}_current_hue);
                           sat: !lambda return x;
-              
+
               # Saturation icon at bottom
               - label:
                   align: bottom_mid
@@ -383,7 +383,7 @@ lvgl:
                   text: $mdi_circle_opacity
                   text_color: white
 
-        # LIGHT NAME                  
+        # LIGHT NAME
         - label:
             id: ${widget_name}_light_name_label
             y: -420
@@ -619,7 +619,7 @@ lvgl:
 
         # BACK
         - obj:
-            id: ${widget_name}_light_back_btn 
+            id: ${widget_name}_light_back_btn
             x: 150
             y: 0
             width: 80
@@ -652,7 +652,7 @@ lvgl:
             on_click:
               - lvgl.page.show:
                   id: main_page
-                  animation: OUT_TOP  
+                  animation: OUT_TOP
                   time: 300ms
 
 script:
@@ -701,19 +701,19 @@ script:
     then:
       - lambda: |-
           int r = 255, g = 255, b = 255;
-          
+
           // ═══════════════════════════════════════════════════════════════════
           // CHECK: Does the light support color modes?
           // ═══════════════════════════════════════════════════════════════════
-          bool has_color_modes = id(${widget_name}_supports_hs) || 
-                                 id(${widget_name}_supports_rgb) || 
+          bool has_color_modes = id(${widget_name}_supports_hs) ||
+                                 id(${widget_name}_supports_rgb) ||
                                  id(${widget_name}_supports_color_temp);
-          
+
           // ═══════════════════════════════════════════════════════════════════
           // CHECK: Is the light turned on?
           // ═══════════════════════════════════════════════════════════════════
           bool is_light_on = id(${widget_name}_light_state).state;
-          
+
           if (!is_light_on) {
             // ═════════════════════════════════════════════════════════════════
             // LIGHT IS OFF -> GREY COLOR (regardless of mode)
@@ -721,22 +721,22 @@ script:
             r = 153;  // 60% от 255
             g = 153;
             b = 153;
-            
+
           } else if (has_color_modes) {
             // ═════════════════════════════════════════════════════════════════
             // MODE 1: LIGHT ON + COLOR SUPPORTED (HS/RGB/ColorTemp)
             // ═════════════════════════════════════════════════════════════════
-            
+
             if (id(${widget_name}_is_temp_mode)) {
               // ───────────────────────────────────────────────────────────────
               // SUBMODE: COLOR TEMPERATURE (Color Temp)
               // Convert Kelvin → RGB
               // ───────────────────────────────────────────────────────────────
               float temp = id(${widget_name}_current_color_temp) / 100.0;
-              
+
               // Algorithm to convert color temperature to RGB
               // Source: Tanner Helland algorithm
-              
+
               // Red channel
               if (temp <= 66) {
                 r = 255;
@@ -745,7 +745,7 @@ script:
                 r = 329.698727446 * pow(r, -0.1332047592);
                 r = (r < 0) ? 0 : ((r > 255) ? 255 : r);
               }
-              
+
               // Green channel
               if (temp <= 66) {
                 g = temp;
@@ -755,7 +755,7 @@ script:
                 g = 288.1221695283 * pow(g, -0.0755148492);
               }
               g = (g < 0) ? 0 : ((g > 255) ? 255 : g);
-              
+
               // Blue channel
               if (temp >= 66) {
                 b = 255;
@@ -765,8 +765,8 @@ script:
                 b = temp - 10;
                 b = 138.5177312231 * log(b) - 305.0447927307;
                 b = (b < 0) ? 0 : ((b > 255) ? 255 : b);
-              }            
-              
+              }
+
             } else {
               // ───────────────────────────────────────────────────────────────
               // SUBMODE: HUE/SATURATION (HS)
@@ -775,13 +775,13 @@ script:
               float h = id(${widget_name}_current_hue);
               float s = id(${widget_name}_current_saturation) / 100.0;
               float v = 1.0; // Use full brightness to display the color
-              
+
               float c = v * s;
               float x = c * (1 - fabs(fmod(h / 60.0, 2) - 1));
               float m = v - c;
-              
+
               float r_prime, g_prime, b_prime;
-              
+
               if (h >= 0 && h < 60) {
                 r_prime = c; g_prime = x; b_prime = 0;
               } else if (h >= 60 && h < 120) {
@@ -795,76 +795,76 @@ script:
               } else {
                 r_prime = c; g_prime = 0; b_prime = x;
               }
-              
+
               r = (r_prime + m) * 255;
               g = (g_prime + m) * 255;
               b = (b_prime + m) * 255;
-              
+
             }
-            
+
             // ─────────────────────────────────────────────────────────────────
             // Apply brightness scaling: 60% → 100%
             // ─────────────────────────────────────────────────────────────────
             float real_brightness = id(${widget_name}_current_brightness) / 255.0;
             float brightness_display = 0.6 + (real_brightness * 0.4);
-            
+
             r = r * brightness_display;
             g = g * brightness_display;
-            b = b * brightness_display;     
-            
+            b = b * brightness_display;
+
           } else {
             // ═════════════════════════════════════════════════════════════════
             // MODE 2: LIGHT ON + NO COLOR (brightness/onoff)
             // ═════════════════════════════════════════════════════════════════
-            
+
             // ───────────────────────────────────────────────────────────────
             // LIGHT IS ON -> YELLOW COLOR (0xFFFF00)
             // ───────────────────────────────────────────────────────────────
             r = 255;
             g = 255;
             b = 0;
-            
+
             // If brightness is supported - apply scaling
             if (id(${widget_name}_supports_brightness)) {
               float real_brightness = id(${widget_name}_current_brightness) / 255.0;
               float brightness_display = 0.6 + (real_brightness * 0.4);
-              
+
               r = r * brightness_display;
               g = g * brightness_display;
               b = b * brightness_display;
-              
+
             } else {
               // No brightness support - use yellow at 80%
               r = 204; // 80% of 255
               g = 204;
               b = 0;
-              
+
             }
           }
-          
+
           // ═══════════════════════════════════════════════════════════════════
           // APPLYING COLOR TO THE WIDGET - Shadow glow effect
           // ═══════════════════════════════════════════════════════════════════
-          
+
           // Form the color as 0xRRGGBB
           uint32_t color = (r << 16) | (g << 8) | b;
-          
+
           // Calculate shadow spread and width based on brightness
           float brightness_ratio = id(${widget_name}_current_brightness) / 255.0f;
           uint8_t shadow_spread = 2 + (uint8_t)(brightness_ratio * 20);  // 2 to 22
           uint8_t shadow_width = 20 + (uint8_t)(brightness_ratio * 80);  // 20 to 100
-          
+
           // If light is off, use minimal glow
           if (!is_light_on) {
             shadow_spread = 2;
             shadow_width = 20;
           }
-          
+
           // Set the shadow color and size for glow effect
           lv_obj_set_style_shadow_color(id(${widget_name}_lightbulb_btn), lv_color_hex(color), 0);
           lv_obj_set_style_shadow_spread(id(${widget_name}_lightbulb_btn), shadow_spread, 0);
           lv_obj_set_style_shadow_width(id(${widget_name}_lightbulb_btn), shadow_width, 0);
-          
+
           // Set the icon color to match
           lv_obj_set_style_text_color(id(${widget_name}_lightbulb_icon), lv_color_hex(color), 0);
 
@@ -880,8 +880,8 @@ script:
       - if:
           condition:
             lambda: |-
-              return id(${widget_name}_supports_hs) || 
-                     id(${widget_name}_supports_rgb) || 
+              return id(${widget_name}_supports_hs) ||
+                     id(${widget_name}_supports_rgb) ||
                      id(${widget_name}_supports_color_temp);
           then:
             # ─────────────────────────────────────────────────────────────────
@@ -947,21 +947,21 @@ script:
                 align: bottom_mid
                 x: 0
 
-  # ─────────────────────────────────────────────────────────────────────
-  # CONTROL VISIBILITY OF BRIGHTNESS SLIDER
-  # ─────────────────────────────────────────────────────────────────────
+      # ─────────────────────────────────────────────────────────────────────
+      # CONTROL VISIBILITY OF BRIGHTNESS SLIDER
+      # ─────────────────────────────────────────────────────────────────────
       - if:
           condition:
             lambda: 'return id(${widget_name}_supports_brightness);'
           then:
             - lvgl.widget.show: ${widget_name}_light_brightness_background
-            
+
             # Check mode (with arcs or without)
             - if:
                 condition:
                   lambda: |-
-                    return id(${widget_name}_supports_hs) || 
-                           id(${widget_name}_supports_rgb) || 
+                    return id(${widget_name}_supports_hs) ||
+                           id(${widget_name}_supports_rgb) ||
                            id(${widget_name}_supports_color_temp);
                 then:
                   # ═══════════════════════════════════════════════════════════
@@ -970,7 +970,7 @@ script:
                   - if:
                       condition:
                         lambda: |-
-                          return !id(${widget_name}_is_temp_mode) && 
+                          return !id(${widget_name}_is_temp_mode) &&
                                  (id(${widget_name}_supports_hs) || id(${widget_name}_supports_rgb));
                       then:
                         # Saturation visible → brightness at -160
@@ -1016,10 +1016,10 @@ script:
 
           else:
             - lvgl.widget.hide: ${widget_name}_light_brightness_background
-      
-  # ─────────────────────────────────────────────────────────────────────
-  # CONTROL VISIBILITY OF SATURATION SLIDER
-  # ─────────────────────────────────────────────────────────────────────
+
+      # ─────────────────────────────────────────────────────────────────────
+      # CONTROL VISIBILITY OF SATURATION SLIDER
+      # ─────────────────────────────────────────────────────────────────────
       - if:
           condition:
             lambda: 'return id(${widget_name}_supports_hs) || id(${widget_name}_supports_rgb);'
@@ -1044,10 +1044,10 @@ script:
 
           else:
             - lvgl.widget.hide: ${widget_name}_light_saturation_background
-      
-  # ─────────────────────────────────────────────────────────────────────
-  # CONTROL VISIBILITY OF HS ARC AND GRADIENT
-  # ─────────────────────────────────────────────────────────────────────
+
+      # ─────────────────────────────────────────────────────────────────────
+      # CONTROL VISIBILITY OF HS ARC AND GRADIENT
+      # ─────────────────────────────────────────────────────────────────────
       - if:
           condition:
             lambda: 'return id(${widget_name}_supports_hs) || id(${widget_name}_supports_rgb);'
@@ -1068,10 +1068,10 @@ script:
             # HS not supported - always hide
             - lvgl.widget.hide: ${widget_name}_hue_gradient_obj
             - lvgl.widget.hide: ${widget_name}_light_arc_hue
-      
-  # ─────────────────────────────────────────────────────────────────────
-  # CONTROL VISIBILITY OF COLOR TEMP ARC AND GRADIENT
-  # ─────────────────────────────────────────────────────────────────────
+
+      # ─────────────────────────────────────────────────────────────────────
+      # CONTROL VISIBILITY OF COLOR TEMP ARC AND GRADIENT
+      # ─────────────────────────────────────────────────────────────────────
       - if:
           condition:
             lambda: 'return id(${widget_name}_supports_color_temp);'
@@ -1092,18 +1092,18 @@ script:
             # Color Temp not supported - always hide
             - lvgl.widget.hide: ${widget_name}_color_temp_gradient_obj
             - lvgl.widget.hide: ${widget_name}_light_arc_color_temp
-      
-  # ─────────────────────────────────────────────────────────────────────
-  # AUTOMATIC MODE SELECTION (if the bulb supports only one)
-  # ─────────────────────────────────────────────────────────────────────
+
+      # ─────────────────────────────────────────────────────────────────────
+      # AUTOMATIC MODE SELECTION (if the bulb supports only one)
+      # ─────────────────────────────────────────────────────────────────────
       - if:
           condition:
             lambda: |-
               // If the bulb DOES NOT support both modes - choose the available one
-              return !(id(${widget_name}_supports_color_temp) && 
+              return !(id(${widget_name}_supports_color_temp) &&
                       (id(${widget_name}_supports_hs) || id(${widget_name}_supports_rgb)));
           then:
-            
+
             # Automatic mode selection
             - if:
                 condition:
@@ -1122,5 +1122,3 @@ script:
                         - lambda: |-
                             id(${widget_name}_is_temp_mode) = true;
                         - script.execute: ${widget_name}_toggle_gradient
-
-                    

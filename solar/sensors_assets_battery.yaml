@@ -1,4 +1,4 @@
-#You need at add energy_info.yaml to your configuration.yaml
+# You need at add energy_info.yaml to your configuration.yaml
 ---
 sensor:
   - platform: homeassistant
@@ -12,7 +12,7 @@ sensor:
             id: battery_soc_percentage
             text:
               format: "%.0f%%"
-              args: [ 'id(current_battery_soc).state' ]
+              args: ['id(current_battery_soc).state']
         # Update battery image based on percentage
         - if:
             condition:
@@ -48,7 +48,7 @@ sensor:
             then:
               - lvgl.image.update:
                   id: battery_soc_image
-                  src: battery_10_45             
+                  src: battery_10_45
 
   - platform: homeassistant
     id: daily_battery_energy_charged
@@ -60,7 +60,7 @@ sensor:
             id: daily_battery_energy_charged_watts
             text:
               format: "%.1f"
-              args: [ 'id(daily_battery_energy_charged).state' ]
+              args: ['id(daily_battery_energy_charged).state']
 
   - platform: homeassistant
     id: daily_battery_energy_discharged
@@ -72,7 +72,7 @@ sensor:
             id: daily_battery_energy_discharged_watts
             text:
               format: "%.1f"
-              args: [ 'id(daily_battery_energy_discharged).state' ]
+              args: ['id(daily_battery_energy_discharged).state']
 
 binary_sensor:
   - platform: homeassistant
@@ -99,5 +99,3 @@ binary_sensor:
               - lvgl.image.update:
                   id: grid_status_icon
                   src: grid_down_45
-
-

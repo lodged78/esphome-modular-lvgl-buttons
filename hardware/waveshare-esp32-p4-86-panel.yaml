@@ -1,5 +1,6 @@
 # Hardware configuration file for Waveshare ESP32-P4-86-Panel 720px x 720px smart panel
 # https://www.waveshare.com/wiki/ESP32-P4-86-Panel-ETH-2RO
+---
 
 substitutions:
   # Screen Size
@@ -32,20 +33,20 @@ esp_ldo:
   - channel: 3
     voltage: 2.5V
 
-#-------------------------------------------
+# -------------------------------------------
 # Network hardware
-#-------------------------------------------  
+# -------------------------------------------
 
 # Ethernet settings
 # ethernet:
-  # type: IP101
-  # mdc_pin: GPIO31
-  # mdio_pin: GPIO52
-  # clk: 
-    # pin: GPIO50
-    # mode: CLK_EXT_IN
-  # phy_addr: 1
-  # power_pin: GPIO51
+#   type: IP101
+#   mdc_pin: GPIO31
+#   mdio_pin: GPIO52
+#   clk:
+#     pin: GPIO50
+#     mode: CLK_EXT_IN
+#   phy_addr: 1
+#   power_pin: GPIO51
 
 esp32_hosted:
   active_high: true
@@ -56,28 +57,28 @@ esp32_hosted:
   d0_pin: GPIO14
   d1_pin: GPIO15
   d2_pin: GPIO16
-  d3_pin: GPIO17  
+  d3_pin: GPIO17
 
-#-------------------------------------------
+# -------------------------------------------
 # LCD Back light and Relays
-#-------------------------------------------
+# -------------------------------------------
 output:
   - platform: ledc
     id: gpio_backlight_pwm
     pin: GPIO26
     frequency: 100Hz
     inverted: true
-    min_power: 0.1 # To prevent the backlight from being too dim
-    max_power: 0.8 # To prevent overheating due to excessive lighting
+    min_power: 0.1  # To prevent the backlight from being too dim
+    max_power: 0.8  # To prevent overheating due to excessive lighting
 
   - id: internal_relay_1
     platform: gpio
     pin: GPIO32
-    
+
   - id: internal_relay_2
     platform: gpio
-    pin: GPIO46    
-    
+    pin: GPIO46
+
 light:
   - platform: monochromatic
     output: gpio_backlight_pwm
@@ -86,9 +87,9 @@ light:
     id: display_backlight
     restore_mode: ALWAYS_ON
 
-#-------------------------------------------
+# -------------------------------------------
 # Touchscreen gt911
-#-------------------------------------------
+# -------------------------------------------
 i2c:
   - id: i2c_bus_a
     sda: GPIO7
@@ -102,31 +103,31 @@ touchscreen:
   display: my_display
   i2c_id: i2c_bus_a
   # on_touch:
-    # - lambda: |-
-        # ESP_LOGI("Touch", "Touch detected at x=%d, y=%d", touch.x, touch.y);
+  #   - lambda: |-
+  #       ESP_LOGI("Touch", "Touch detected at x=%d, y=%d", touch.x, touch.y);
   # on_update:
-    # - lambda: |-
-          # for (auto touch: touches)  {
-              # if (touch.state <= 2) {
-                # ESP_LOGI("Touch points:", "id=%d x=%d, y=%d x.raw=%d, y.raw=%d", touch.id, touch.x, touch.y, touch.x_raw, touch.y_raw);
-              # }
-          # }
+  #   - lambda: |-
+  #       for (auto touch: touches)  {
+  #           if (touch.state <= 2) {
+  #             ESP_LOGI("Touch points:", "id=%d x=%d, y=%d x.raw=%d, y.raw=%d", touch.id, touch.x, touch.y, touch.x_raw, touch.y_raw);
+  #           }
+  #       }
 
-#-------------------------------------------
+# -------------------------------------------
 # Display mipi_dsi
-#-------------------------------------------
+# -------------------------------------------
 display:
   - platform: mipi_dsi
     id: my_display
     model: WAVESHARE-P4-86-PANEL
-  
-# Special LVGL settings required for this display  
+
+# Special LVGL settings required for this display
 lvgl:
   byte_order: little_endian
 
-#-------------------------------------------
+# -------------------------------------------
 # Audio
-#-------------------------------------------
+# -------------------------------------------
 switch:
   - platform: gpio
     id: audio_amplifier
@@ -199,4 +200,3 @@ speaker:
     output_speaker: media_mixing_input
     sample_rate: 48000
     bits_per_sample: 16
-

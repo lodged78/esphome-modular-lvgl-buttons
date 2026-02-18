@@ -2,15 +2,16 @@
 # https://github.com/profi-max/JC4827W543_4.3inch_ESP32S3_board/tree/main
 #
 # Hardware configuration file for built in speaker
+---
 
-#-------------------------------------------
+# -------------------------------------------
 #  Audio output (Mono)
-#-------------------------------------------
+# -------------------------------------------
 i2s_audio:
-    i2s_lrclk_pin:
-      number: 2
-    i2s_bclk_pin:
-      number: 42
+  i2s_lrclk_pin:
+    number: 2
+  i2s_bclk_pin:
+    number: 42
 
 speaker:
   - platform: i2s_audio
@@ -36,8 +37,8 @@ media_player:
     name: "Media Player"
     id: speaker_media_player_id
     media_pipeline:
-        speaker: media_spk_resampling_input
-        num_channels: 2
+      speaker: media_spk_resampling_input
+      num_channels: 2
     announcement_pipeline:
-        speaker: announcement_spk_resampling_input
-        num_channels: 1
+      speaker: announcement_spk_resampling_input
+      num_channels: 1

@@ -12,7 +12,7 @@ script:
       - script.execute: fetch_solar_today
 
   - id: fetch_solar_today
-    then: 
+    then:
       - logger.log:
           level: INFO
           format: "Requesting solar data from Home Assistant..."
@@ -57,12 +57,12 @@ script:
                 float net_consumption = data["net_consumption"].as<float>();
                 float production = data["production"].as<float>();
                 float net_production = data["net_production"].as<float>();
-                
+
                 id(sensor_energy_consumption_today).publish_state(consumption);
                 id(sensor_net_energy_consumption_today).publish_state(net_consumption);
                 id(sensor_energy_production_today).publish_state(production);
                 id(sensor_net_energy_production_today).publish_state(net_production);
-                
+
                 ESP_LOGI("energy", "Consumption: %.2f kWh", consumption);
                 ESP_LOGI("energy", "Net Consumption: %.2f kWh", net_consumption);
                 ESP_LOGI("energy", "Production: %.2f kWh", production);

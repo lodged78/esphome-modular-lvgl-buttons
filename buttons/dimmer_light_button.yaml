@@ -126,7 +126,7 @@ sensor:
     attribute: brightness
     filters:
       - filter_out: nan
-      
+
     on_value:
       - lvgl.slider.update:
           id: slider_${uid}

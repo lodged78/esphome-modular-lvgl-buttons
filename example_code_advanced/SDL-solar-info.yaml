@@ -1,4 +1,5 @@
 # Substitution variables used through the codebase
+---
 
 external_components:
   - source: github://pr#13987
@@ -9,9 +10,9 @@ external_components:
 substitutions:
   # Envoy serial number
   envoy_id: '122030047695'
-  #envoy_id: !secret envoy_id
+  # envoy_id: !secret envoy_id
   enpower_id: !secret enpower_id
-  
+
   icon_font: mdi_icons_40
   text_font: nunito_18
   sensor_font: nunito_36
@@ -56,11 +57,11 @@ logger:
 script:
   - id: time_update
     then:
-        # The format %I:%M %p will display the time in a 12-hour format with "am" or "pm" included  
+      # The format %I:%M %p will display the time in a 12-hour format with "am" or "pm" included
       - lvgl.label.update:
           id: time_label
-          text: !lambda 'return id(system_time).now().strftime("%l:%M %P");'    
-          
+          text: !lambda 'return id(system_time).now().strftime("%l:%M %P");'
+
 packages:
   # Generic configuration for ESP32 screens
   # All the colors
@@ -75,11 +76,11 @@ packages:
   time: !include esphome-modular-lvgl-buttons/common/time_homeassistant.yaml
   # Styles + Themes
   theme_style: !include esphome-modular-lvgl-buttons/common/theme_style.yaml
-  #theme_style: !include esphome-modular-lvgl-buttons/common/theme_style_debug.yaml
-  
+  # theme_style: !include esphome-modular-lvgl-buttons/common/theme_style_debug.yaml
+
   # Harware description file
   hardware: !include esphome-modular-lvgl-buttons/hardware/SDL-lvgl.yaml
-  
+
   # Basic boot screen with ESPHome logo and device diagnostic info
   loading_screen: !include esphome-modular-lvgl-buttons/pages/loading_480px.yaml
   # info screen - WiFi login, IP address, MAC address etc
@@ -88,7 +89,7 @@ packages:
   solar: !include esphome-modular-lvgl-buttons/solar/update_solar.yaml
   realtime_solar: !include esphome-modular-lvgl-buttons/solar/sensors_assets_solar_realtime.yaml
 
-  # This section will add buttons and page to your screen using the ESPHome package system. 
+  # This section will add buttons and page to your screen using the ESPHome package system.
   # Each package has all the code required for the button or page (LVGL, sensors, etc)
 
 
@@ -150,7 +151,6 @@ packages:
       column: 3
       text: 00:00
       click_page: info_screen
-      
 
 
 # This is the main LVGL section. We start with a simple grid.
@@ -161,39 +161,39 @@ lvgl:
       styles: page_style
       <<: !include esphome-modular-lvgl-buttons/widgets/swipe_navigation.yaml
       widgets:
-          # You can use the package section above to add prebuilt button types or build your own custom button from scratch here.
-          - container:
-              id: consumption_chart
-              grid_cell_x_align: stretch
-              grid_cell_y_align: stretch
-              grid_cell_row_pos: 1
-              grid_cell_column_pos: 3
-              grid_cell_row_span: 2
-              grid_cell_column_span: 3
-              pad_left: 40
-              pad_bottom: 25
-              pad_right: 5
-              pad_top: 5
-              widgets:
-                - chart:
-                    id: consumption_chart_widget
-                    width: 100%
-                    height: 100%
-                    bg_opa: TRANSP
-                    border_width: 0
-                    indicator:
-                      opa: TRANSP
-                    type: LINE
-                    point_count: 288
-                    div_line_count: [4, 5]
-                    y_axis:
-                      min_value: 0
-                      max_value: 15000
-                    series:
-                      - id: consumption_chart_series
-                        color: 0xF37320
-                        y_axis: PRIMARY_Y
-  
+        # You can use the package section above to add prebuilt button types or build your own custom button from scratch here.
+        - container:
+            id: consumption_chart
+            grid_cell_x_align: stretch
+            grid_cell_y_align: stretch
+            grid_cell_row_pos: 1
+            grid_cell_column_pos: 3
+            grid_cell_row_span: 2
+            grid_cell_column_span: 3
+            pad_left: 40
+            pad_bottom: 25
+            pad_right: 5
+            pad_top: 5
+            widgets:
+              - chart:
+                  id: consumption_chart_widget
+                  width: 100%
+                  height: 100%
+                  bg_opa: TRANSP
+                  border_width: 0
+                  indicator:
+                    opa: TRANSP
+                  type: LINE
+                  point_count: 288
+                  div_line_count: [4, 5]
+                  y_axis:
+                    min_value: 0
+                    max_value: 15000
+                  series:
+                    - id: consumption_chart_series
+                      color: 0xF37320
+                      y_axis: PRIMARY_Y
+
 # If you want to use other icons add them to the list here
 font:
   # http://materialdesignicons.com/cdn/7.4.47/

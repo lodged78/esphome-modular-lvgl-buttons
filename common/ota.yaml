@@ -3,7 +3,7 @@ ota:
   - platform: web_server
   - platform: esphome
     id: ota_state
-    on_begin: 
+    on_begin:
       - logger.log: "OTA Start"
       - light.turn_on: display_backlight
       - lambda: "id(display_backlight).loop();"
@@ -22,7 +22,7 @@ ota:
       - lambda: "id(lvgl_component).loop();"
       - logger.log: "OTA widget shown"
 
-    on_progress: 
+    on_progress:
       - lvgl.bar.update:
           id: ota_bar_value
           value: !lambda return (int)x;
@@ -53,8 +53,8 @@ ota:
 
     on_error:
       - logger.log:
-            format: "OTA update error %d"
-            args: ["x"]
+          format: "OTA update error %d"
+          args: ["x"]
       - lvgl.label.update:
           id: ota_label_primary
           text: 'Update ERROR'
@@ -62,7 +62,7 @@ ota:
           id: ota_label_secondary
           text: 'Rebooting...'
       - lambda: |-
-          id(lvgl_component).loop();   
+          id(lvgl_component).loop();
 
 lvgl:
   id: lvgl_component

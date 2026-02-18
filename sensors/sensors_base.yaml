@@ -15,7 +15,7 @@ sensor:
     id: wifi_signal_db
     update_interval: 60s
     internal: true
-    
+
   - platform: internal_temperature
     id: cpu_temperature
     name: "CPU Temperature"
@@ -23,7 +23,7 @@ sensor:
       - lambda: return (x * 1.8) + 32;
     unit_of_measurement: "°F"
     icon: mdi:thermometer
-    entity_category: diagnostic    
+    entity_category: diagnostic
 
   # Reports the WiFi signal strength in %
   - platform: copy
@@ -37,12 +37,12 @@ sensor:
     unit_of_measurement: "%"
     entity_category: diagnostic
     on_value:
-        then:
-          - lvgl.label.update:
-              id: wifi_signal_db_percent_label
-              text:
-                format: "%.0f%%"
-                args: [ 'id(wifi_signal_db_percent).state' ]
+      then:
+        - lvgl.label.update:
+            id: wifi_signal_db_percent_label
+            text:
+              format: "%.0f%%"
+              args: ['id(wifi_signal_db_percent).state']
 
 binary_sensor:
   - platform: status
@@ -69,7 +69,7 @@ text_sensor:
             id: esphome_version_label
             text:
               format: "%s"
-              args: [ 'id(esphome_version).state.c_str()' ]
+              args: ['id(esphome_version).state.c_str()']
 
   - platform: wifi_info
     mac_address:
@@ -78,11 +78,11 @@ text_sensor:
       icon: mdi:network-pos
       entity_category: diagnostic
       on_value:
-          - lvgl.label.update:
-              id: connected_mac_label
-              text:
-                format: "%s"
-                args: [ 'id(mac_address).state.c_str()' ]
+        - lvgl.label.update:
+            id: connected_mac_label
+            text:
+              format: "%s"
+              args: ['id(mac_address).state.c_str()']
 
     ip_address:
       id: ip_address
@@ -95,7 +95,7 @@ text_sensor:
               id: ip_address_label
               text:
                 format: "%s"
-                args: [ 'id(ip_address).state.c_str()' ]
+                args: ['id(ip_address).state.c_str()']
 
     ssid:
       id: connected_ssid
@@ -108,7 +108,7 @@ text_sensor:
               id: connected_ssid_label
               text:
                 format: "%s"
-                args: [ 'id(connected_ssid).state.c_str()' ]
+                args: ['id(connected_ssid).state.c_str()']
 
   - platform: template
     name: "Device Name"
@@ -122,12 +122,12 @@ text_sensor:
             id: device_name_label
             text:
               format: "%s"
-              args: [ 'id(device_name).state.c_str()' ]
+              args: ['id(device_name).state.c_str()']
         - lvgl.qrcode.update:
             id: cp_login
             text:
               format: "WIFI:S:%s;T:WPA;P:password;;"
-              args: [ 'id(device_name).state.c_str()' ]
+              args: ['id(device_name).state.c_str()']
         - logger.log:
             format: "Updated QRcode login info - WIFI:S:%s;T:WPA;P:password;;"
-            args: [ 'id(device_name).state.c_str()' ]
+            args: ['id(device_name).state.c_str()']

@@ -1,5 +1,6 @@
 # SDL screen for testing
 # Hardware configuration file
+---
 
 esphome:
   min_version: 2025.10.0
@@ -24,16 +25,16 @@ touchscreen:
   id: my_touchscreen
   display: my_display
   # on_touch:
-    # - logger.log:
-          # format: Touch at (%d, %d)
-          # args: [touch.x, touch.y]
-    # - lambda: |-
-          # ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
-              # touch.x,
-              # touch.y,
-              # touch.x_raw,
-              # touch.y_raw
-              # );
+  #   - logger.log:
+  #       format: Touch at (%d, %d)
+  #       args: [touch.x, touch.y]
+  #   - lambda: |-
+  #       ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+  #           touch.x,
+  #           touch.y,
+  #           touch.x_raw,
+  #           touch.y_raw
+  #           );
 
 light:
   - platform: monochromatic

@@ -1,12 +1,12 @@
-#You need at add energy_info.yaml to your Home Assistant configuration.yaml
+# You need at add energy_info.yaml to your Home Assistant configuration.yaml
 ---
 globals:
   - id: consumption_history
     type: std::vector<float>
-    restore_value: no
+    restore_value: false
   - id: production_history
     type: std::vector<float>
-    restore_value: no
+    restore_value: false
 
 script:
   - id: !extend on_ha_connected

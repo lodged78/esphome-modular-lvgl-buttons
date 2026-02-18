@@ -1,6 +1,8 @@
 # sunton-esp32-2432s028
 #
 # Hardware configuration file
+---
+
 substitutions:
   # Screen Size
   screen_height: 320
@@ -34,9 +36,9 @@ i2c:
 #     name: "Brightness"
 #     update_interval: 60s
 
-#-------------------------------------------
+# -------------------------------------------
 # Backlight
-#-------------------------------------------
+# -------------------------------------------
 output:
   - platform: ledc
     pin: 21
@@ -55,7 +57,7 @@ output:
     inverted: true
 
 light:
-  - platform: monochromatic # Define a monochromatic, dimmable light for the backlight
+  - platform: monochromatic  # Define a monochromatic, dimmable light for the backlight
     output: gpio_backlight_pwm
     name: Display Backlight
     icon: mdi:lightbulb-on
@@ -95,27 +97,27 @@ touchscreen:
       y_max: 3860
     transform:
       mirror_x: false  # original used to be true
-      mirror_y: true  #added this line
-      swap_xy: false  #added this line
-    # on_touch:
-    #   - lambda: |-
-    #         ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
-    #           touch.x,
-    #           touch.y,
-    #           touch.x_raw,
-    #           touch.y_raw
-    #         );
+      mirror_y: true  # added this line
+      swap_xy: false  # added this line
+# on_touch:
+#   - lambda: |-
+#         ESP_LOGI("cal", "x=%d, y=%d, x_raw=%d, y_raw=%0d",
+#           touch.x,
+#           touch.y,
+#           touch.x_raw,
+#           touch.y_raw
+#         );
 
 display:
   - id: my_display
     platform: ili9xxx
-    model:  TFT 2.4R    # original used to be LI9341
+    model: TFT 2.4R  # original used to be LI9341
     spi_id: tft
     cs_pin:
       number: 15
       ignore_strapping_warning: true
     dc_pin:
-      number:  2
+      number: 2
       ignore_strapping_warning: true
     invert_colors: true   # original used to be false
     color_palette: 8BIT   # added this line
@@ -124,7 +126,6 @@ display:
     transform:            # added this line
       swap_xy: true
       mirror_x: false
-    dimensions:           #added this line
+    dimensions:           # added this line
       height: 320
       width: 240
-

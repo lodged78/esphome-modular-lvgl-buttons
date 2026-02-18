@@ -1,3 +1,4 @@
+---
 color:
     - id: burnt_sienna
       hex: 'CC5E14'
@@ -31,7 +32,7 @@ color:
       hex: '424242'
     - id: gray900
       hex: '212121'
-      
+
     - id: sky_blue
       hex: 3FA7F3
     - id: slate_blue_gray
@@ -81,8 +82,8 @@ color:
     - id: dark_blue
       hex: 4867aa
     - id: deep_purple
-      hex: 543D72  
-          
+      hex: 543D72
+
 
 # The standard RGB color table is already in ESPHome!
 # RGB color table

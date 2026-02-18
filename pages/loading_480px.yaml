@@ -1,3 +1,4 @@
+---
 globals:
   - id: ha_connected
     type: bool
@@ -5,7 +6,7 @@ globals:
 
 image:
   rgb565:
-    alpha_channel:    
+    alpha_channel:
       - file: 'esphome-modular-lvgl-buttons/assets/images/loading/homeassistant.png'
         id: ha_img
         resize: 400x82
@@ -148,9 +149,9 @@ api:
           lambda: 'return (0 == client_info.find("Home Assistant "));'
         then:
           - script.execute: update_loading_page
-          # - lvgl.label.update: 
-              # id: ha_status
-              # text_color: blue
+          # - lvgl.label.update:
+          # id: ha_status
+          # text_color: blue
           - script.execute: on_ha_connected
 
   on_client_disconnected:
@@ -158,9 +159,9 @@ api:
         condition:
           lambda: 'return (0 == client_info.find("Home Assistant "));'
         then:
+          # - lvgl.label.update:
+          #     id: ha_status
+          #     text_color: steel_blue
           - globals.set:
               id: ha_connected
               value: 'false'
-          # - lvgl.label.update: 
-              # id: ha_status
-              # text_color: steel_blue

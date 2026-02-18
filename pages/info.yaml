@@ -3,7 +3,7 @@ lvgl:
   style_definitions:
     - id: boot_screen_style
       text_font: nunito_20
-      text_color: black # not working at the moment
+      text_color: black  # not working at the moment
       pad_all: 2
   pages:
     - id: info_screen
@@ -16,8 +16,8 @@ lvgl:
             height: 100%
             layout:
               type: GRID
-              grid_rows: [ content,content,content,content,content,content,content,content,content,content ]
-              grid_columns: [ FR(45), FR(55) ]
+              grid_rows: [content, content, content, content, content, content, content, content, content, content]
+              grid_columns: [FR(45), FR(55)]
               pad_column: 4
               pad_row: 5
             widgets:
@@ -151,11 +151,9 @@ lvgl:
             width: 100
             height: 50
             widgets:
-             - label:
-                 text_color: white
-                 align: center
-                 text: "Exit"
+              - label:
+                  text_color: white
+                  align: center
+                  text: "Exit"
             on_press:
               - lvgl.page.show: main_page
-
-

@@ -1,15 +1,15 @@
 ---
 # Light toggle button color
 # vars:
-  # uid:
-  # height:
-  # text:
-  # icon:
-  # entity_id:
-  # color:
+# uid:
+# height:
+# text:
+# icon:
+# entity_id:
+# color:
 
 # This function requires this helper scrip in Home Assistant
-#script:
+# script:
 #  set_light_rgb:
 #    alias: 'ESPHome RGB light helper script'
 #    sequence:
@@ -21,7 +21,6 @@
 #        data:
 #          entity_id: "{{ light_name }}"
 #          rgb_color: ["{{ r }}", "{{ g }}", "{{ b }}"]
-
 
 
 radius: 5px
@@ -36,5 +35,3 @@ on_short_click:
       data:
         light_name: ${entity_id}
         color: "${color}"
-
-

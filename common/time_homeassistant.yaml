@@ -3,7 +3,7 @@ time:
   - platform: homeassistant
     id: system_time
     on_time_sync:
-      - if: # Updates the last restart time
+      - if:  # Updates the last restart time
           condition:
             lambda: 'return id(device_last_restart).state == "";'
           then:

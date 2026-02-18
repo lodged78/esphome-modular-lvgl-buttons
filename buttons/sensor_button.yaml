@@ -6,7 +6,7 @@
 #    column:
 #    row_span:
 #    column_span:
-#    text: 
+#    text:
 #    icon:
 #    icon_color:
 #    sensor_id:
@@ -48,7 +48,7 @@ lvgl:
                         grid_cell_y_align: center
                         text: ${icon}
                     - label:
-                        id: label_${sensor_id}                    
+                        id: label_${sensor_id}
                         text_font: $text_font
                         width: 100%
                         long_mode: wrap
@@ -59,7 +59,7 @@ lvgl:
                         text_align: left
                         text: ${text}
                     - label:
-                        id: data_${sensor_id}                    
+                        id: data_${sensor_id}
                         text_font: ${sensor_font | default("$text_font")}
                         grid_cell_row_pos: 1
                         grid_cell_column_pos: 1
@@ -67,7 +67,7 @@ lvgl:
                         grid_cell_y_align: end
                         text_align: left
                         text: '----'
-                   
+
 
 # Update button when sensor value changes
 sensor:

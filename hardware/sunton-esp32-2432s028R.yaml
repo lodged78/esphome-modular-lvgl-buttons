@@ -1,6 +1,7 @@
 # sunton-esp32-2432s028R
 #
 # Hardware configuration file
+---
 
 substitutions:
   # Screen Size
@@ -19,9 +20,9 @@ esp32:
   framework:
     type: esp-idf
 
-      
+
 preferences:
-  flash_write_interval: 5min  
+  flash_write_interval: 5min
 
 lvgl:
   buffer_size: 25%
@@ -36,9 +37,9 @@ i2c:
 #     name: "Brightness"
 #     update_interval: 60s
 
-#-------------------------------------------
+# -------------------------------------------
 # Backlight
-#-------------------------------------------
+# -------------------------------------------
 output:
   - platform: ledc
     pin: 21
@@ -58,10 +59,10 @@ output:
     inverted: true
 
 light:
-  - platform: monochromatic # Define a monochromatic, dimmable light for the backlight
+  - platform: monochromatic  # Define a monochromatic, dimmable light for the backlight
     output: gpio_backlight_pwm
     name: Display Backlight
-    icon: mdi:lightbulb-on    
+    icon: mdi:lightbulb-on
     id: display_backlight
     restore_mode: ALWAYS_ON
   - platform: rgb
@@ -116,7 +117,7 @@ display:
       number: 15
       ignore_strapping_warning: true
     dc_pin:
-      number:  2
+      number: 2
       ignore_strapping_warning: true
     invert_colors: false
     update_interval: never

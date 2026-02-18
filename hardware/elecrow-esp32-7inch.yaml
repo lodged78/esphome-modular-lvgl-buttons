@@ -1,7 +1,7 @@
 # Elecrow 7” HMI ESP32 Display 800x480 RGB TFT LCD Touch Screen
 #
 # Hardware configuration file
-
+---
 esphome:
   min_version: 2025.12.0
   project:
@@ -14,7 +14,7 @@ esp32:
   framework:
     type: esp-idf
     advanced:
-       execute_from_psram: true
+      execute_from_psram: true
 
 psram:
   mode: octal
@@ -57,9 +57,9 @@ touchscreen:
     update_interval: 50ms
     address: 0x5D
 
-#-------------------------------------------
+# -------------------------------------------
 # Display
-#-------------------------------------------
+# -------------------------------------------
 display:
   - platform: rpi_dpi_rgb
     id: my_display

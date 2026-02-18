@@ -2,6 +2,7 @@
 # https://www.waveshare.com/esp32-s3-touch-lcd-4.3b.htm
 #
 # Hardware configuration file
+---
 
 esphome:
   min_version: 2025.7.0
@@ -14,7 +15,7 @@ esp32:
   framework:
     type: esp-idf
     advanced:
-       execute_from_psram: true
+      execute_from_psram: true
 
 psram:
   mode: octal
@@ -25,9 +26,9 @@ preferences:
 
 ch422g:
 
-#-------------------------------------------
+# -------------------------------------------
 # Touchscreen gt911 i2c
-#-------------------------------------------
+# -------------------------------------------
 i2c:
   - id: bus_a
     sda: 8
@@ -42,9 +43,9 @@ touchscreen:
       ch422g:
       number: 1
 
-#-------------------------------------------
+# -------------------------------------------
 # Display
-#-------------------------------------------
+# -------------------------------------------
 display:
   - platform: rpi_dpi_rgb
     id: rpi_disp
