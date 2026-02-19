@@ -12,7 +12,8 @@
 #
 # Optional vars:
 #   noaa_unit_system: "english" or "metric" (default: "english")
-#   noaa_unit_label: Display unit label, "ft" or "m" (default: "ft")
+#                     The display unit label ("ft" or "m") is derived
+#                     automatically from this setting.
 #
 # Note: ESP32 timezone should match the NOAA station's timezone for
 #       correct local time display. Epoch comparisons are timezone-safe.
@@ -24,19 +25,21 @@
 #       vars:
 #         noaa_station_id: "9414290"
 #         noaa_unit_system: "english"   # or "metric"
-#         noaa_unit_label: "ft"         # or "m"
 # ═══════════════════════════════════════════════════════════════════════════════
 
 # Defaults for optional vars (used when not provided by the caller)
 defaults:
   noaa_unit_system: english
-  noaa_unit_label: ft
 
 # -------------------------------------------
 # Global Variables
 # -------------------------------------------
 # Store tide prediction data for percentage calculations
 globals:
+  - id: noaa_unit_label
+    type: const char * const
+    restore_value: false
+    initial_value: '"${noaa_unit_system}" == std::string("metric") ? "m" : "ft"'
   - id: noaa_last_tide_epoch
     type: time_t
     restore_value: false
@@ -117,8 +120,8 @@ sensor:
         - lvgl.label.update:
             id: high_tide_height
             text:
-              format: "%.2f ${noaa_unit_label}"
-              args: ['id(high_tide_level).state']
+              format: "%.2f %s"
+              args: ['id(high_tide_level).state', 'id(noaa_unit_label)']
 
   - platform: template
     name: "Low Tide Level"
@@ -130,8 +133,8 @@ sensor:
         - lvgl.label.update:
             id: low_tide_height
             text:
-              format: "%.2f ${noaa_unit_label}"
-              args: ['id(low_tide_level).state']
+              format: "%.2f %s"
+              args: ['id(low_tide_level).state', 'id(noaa_unit_label)']
 
   # Mean High Water and Mean Low Water (relative to MLLW datum)
   # Fetched once on boot from NOAA Metadata API - these values rarely change
@@ -139,14 +142,12 @@ sensor:
     name: "Mean High Water"
     id: mean_high_water
     accuracy_decimals: 2
-    unit_of_measurement: "${noaa_unit_label}"
     update_interval: never
 
   - platform: template
     name: "Mean Low Water"
     id: mean_low_water
     accuracy_decimals: 2
-    unit_of_measurement: "${noaa_unit_label}"
     update_interval: never
 
 # -------------------------------------------

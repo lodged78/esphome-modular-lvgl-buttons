@@ -1,9 +1,14 @@
+---
+# external_components:
+  # - source: github://clydebarrow/esphome@pull/137/head
+    # components: [font, image, lvgl]
+
 # Substitution variables used through the codebase
 substitutions:
   icon_font: mdi_icons_40
   text_font: nunito_24
-  text_color: white
-  bg_color: black
+  text_color: black
+  bg_color: white
   button_on_color: "ep_orange"
   button_off_color: "very_dark_gray"
   icon_on_color: "yellow"
@@ -76,12 +81,12 @@ packages:
   loading_screen: !include esphome-modular-lvgl-buttons/pages/loading_480px.yaml
   info_screen: !include esphome-modular-lvgl-buttons/pages/info.yaml
 
-  # Tide forcast packages
+  # Tide forcast package (Pulls info from NOAA web site directlly)
   tide_info: !include
     file: esphome-modular-lvgl-buttons/NOAA_tides/NOAA_tide_update.yaml
     vars:
-      noaa_station_id: "8454578"
-      noaa_unit_system: english
+      noaa_station_id: "8454578" # your your NOAA station ID here
+      noaa_unit_system: english  # Set to english or meteric
 
   # Weather packages
   # Display weather forecast using direct HA action (no template sensor needed!)
