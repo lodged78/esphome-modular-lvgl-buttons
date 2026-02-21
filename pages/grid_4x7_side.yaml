@@ -5,7 +5,6 @@ pages:
     styles: page_style
     <<: !include ../widgets/swipe_navigation.yaml
     widgets:
-        # You can use the package section above to add prebuilt button types or build your own custom button from scratch here.
         - container: # Button 0 (Active)
             id: ${page_0}_0
             grid_cell_x_align: stretch
